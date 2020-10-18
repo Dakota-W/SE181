@@ -26,7 +26,7 @@
     urlcolor=purple,        
     linktoc=page            
 }
-\def\myversion{1.0.3}
+\def\myversion{1.0.4}
 \date{}
 \usepackage{hyperref}
 \begin{document}
@@ -71,6 +71,8 @@
         1.0.2 & \formatdate{18}{10}{20} & Functional Requirements & Jacky Zheng\\
         \hline
         1.0.3 & \formatdate{18}{10}{20} & Nonfunctional Requirements & Adam Luong\\
+        \hline
+        1.0.4 & \formatdate{18}{10}{20} & Overall Description \& User Interface & Tony Zhu\\
         \hline
     \end{tabular}
 \end{center}
@@ -136,22 +138,74 @@ Our goal is to create a document that will help a team member create an applicat
 both client-side and server-side, that allows remote users to play checkers. The construction of this application will host one game of checkers to two users. 
 \section{Overall Description}
 
+\subsection{Product Perspective}
+
+\indent \indent Checkers is a game meant to be played by two players on a 8x8 checkerboard with 12 dark pieces and 12 light pieces on opposing sides of the board. The pieces are placed on the dark checkered squares on the first 3 rows of each player's respective side. The objective of the game is to place the opposing player’s pieces in a position where the opposing player can no longer make any moves.
+
+\indent The game is meant to be run on 2 computers/web browsers on a website(server). Each player will be able to connect to the server and have the board displayed to them on their web browser, each player's moves will be recorded by the server and then be sent to each player's browsers to accurately display the current board state. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=8cm]{Mockup Game Screen.png}
+    \caption{Mockup of the main game screen, board used from reference 3}
+\end{figure}
+
+\indent The game will display a top down view of the 2-D board as well as a timer and room code as seen in Figure 1. The room code will be used to match players with one another. Likewise the players will interact with the pieces displayed on the board with their mouse to perform moves.
+
+\subsubsection{Web Browser/Computer Interface}
+\indent \indent The users will only be interfacing with the game through a web browser. The browser will contain a menu to either create a game or join a game through a code. Likewise, it will also allow the players to move the pieces and also display the current board and time remaining per turn for to the users.
+
 \subsection{Product Functions}
 
-\begin{enumerate}
-    \item Provide an application to host a checkers game with two user over the local network or internet.
-    \item Provide a server that mediates gameplay, game sessions, and client interactions.
-\end{enumerate}
+\begin{flushleft}
+    {\large 2.2.1. Server Functionality:}
+        {\begin{enumerate}
+            \item The Server will perform the following:
+            \begin{itemize}
+                \item Remains running to allow users to connect to one another through web sessions
+                \item The server will mediates gameplay, game sessions, and client interactions.
+            \end{itemize}
+        \end{enumerate}}
+\end{flushleft}
+
+\begin{flushleft}
+    {\large 2.2.2. Web Browser/Client Functionality:}
+        {\begin{enumerate}
+            \item The Client will perform the following:
+            \begin{itemize}
+                \item Ability to create new game session with unique code
+                \item Ability to connect to game sessions with unique code through server
+                \item Update board based on data from server
+            \end{itemize}    
+    \end{enumerate}}
+\end{flushleft}
+
+\subsection{User Description}
+The ideal users for Checkers would be 2 players 
 
 \subsection{Assumptions and Dependencies}
 
-\begin{enumerate}
-    \item A connection to a local network or internet connection.
-    \item A computer with a graphical environment for the client
-    \item A Unix or Windows based server.
-    \item Knowledge of the rules of checkers.
-    \item Client know how to launch a python file.
-\end{enumerate}
+\begin{flushleft}
+    {\large 2.4.1. SQLite}
+        \begin{itemize}
+            \item The server will be using a SQLite database to hold all the data used to control the game of Checkers. Therefore, if SQLite were to cease support or no longer be available the team would have to restart development with a completely new database in order to proceed, which is not immpossible but will take significant amounts of time. The team assumes that SQLite will continue to work as intended.            
+        \end{itemize}
+\end{flushleft}
+
+\begin{flushleft}
+    {\large 2.4.2. Webserver}
+        \begin{itemize}
+            \item The team will be hosting the game on a webserver, as such if said webserver were to crash or become unavailable, the team would have to rehost the game on a new webserver. The team assumes that the webserver will stay online as intended.
+        \end{itemize}
+\end{flushleft}
+
+\subsection{Requirements Apportioning}
+\begin{figure}[h!]
+    \begin{flushright}
+        \includegraphics[width=13cm]{Priority Chart.png}
+    \end{flushright}
+\end{figure}
+\pagebreak
 
 \section{Functional Requirements}
 
@@ -235,40 +289,64 @@ both client-side and server-side, that allows remote users to play checkers. The
 \begin{enumerate}[label*=N\arabic*.]
     \item After the prototype is completed, the game will then undergo playtesting with approximately 8 people of any age, 4 being familiar with Checkers and 4 with the purpose of attempting to break the game. This way, it will test all aspects of the rules of Checkers and see if the game will run smoothly and correctly. It will also see if any moves that are not in the regulations of Checkers are being permitted within the game. Also it will see if players face little difficulty with the controls and understanding of our prototype. The game will be playtested near the end of Drexel Fall Quarter of 2020. After each playtesting session, the participants will fill out a form that helps answer the findings that we are testing for. The forms will be reviewed by the team. 
 \end{enumerate}
-
+\pagebreak
 \section{User Interface}
-
-\subsection{Framework}
-
-The project shall use Python3? to create the user interface.
 
 \subsection{Menus}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=16cm,scale=.5]{User Interface.png}
+    \caption{Navigating menu screens on the client}
+\end{figure}
+
+\begin{enumerate}
+\item Main Menu Screen - Contains 3 Buttons: Instructions, Create Game, Join Game
 \begin{itemize}
-\item Main Menu
-    \subitem Play Game button: connects player to the server
-    \subitem Quit Game: closes the game
-
-\item Game Lobby
-    \subitem Show players in the lobby
-    \subitem Ready? button: start game once both players click
-    \subitem Main Menu button: return to the main menu
-
-\item Game
-    \subitem Checkers match screen, showing a checkers board with both players’ pieces
-        \subsubitem Player’s “side” of the board is always on the bottom of the screen
-    \subitem Top of screen shows whose turn it is: Black or Red
-        \subsubitem During the player’s turn, they click on a piece to select it
-        \subsubitem Piece becomes highlighted, as does all valid spaces the player could move to
-        \subsubitem Player clicks on a highlighted space to move the piece there or clicks on a new piece to select it
-        \subsubitem After a move has been made, the game checks if there is a winner. Move to Winner Display if a winner is found. Otherwise, start next player’s turn.
-
-\item Winner Display
-    \subitem Show the player who won the game: Black or Red
-    \subitem Rematch? No button: return both players to the main menu
-    \subitem Rematch? Yes button: register this player as wanting a rematch
-        \subsubitem If both players click Yes, then return both players to the Game Lobby screen
+    \item Create Game button: Generates room code, creates game instance and displays Game Screen. \textbf{Priority 1}
+    \item Join Game button: Navigates to Join Game Screen. \textbf{Priority 1}
+    \item Instructions button: Navigates to Instructions screen. \textbf{Priority 2}
 \end{itemize}
+
+\item Game Screen - Contains Checker Board with pieces, a player turn indicator (displays whose turn it is), Room Code, and a Timer (See Figure 1) along with 3 buttons: Draw, Forfeit, and Pause 
+\begin{itemize}
+    \item Room Code: Shows current room code - used by Player 2 to connect to game session. \textbf{Priority 1}
+    \item Once game end condition is met (a player cannot make any more moves), Game End Screen will display \textbf{Priority 1}
+    \item Players will control their pieces movements by interacting with the board using their mouse. \textbf{Priority 1}
+    \item Turn indicator: Will display which players turn it is. Updates when a move on the board has been made by indicated player \textbf{Priority 1}
+    \item Timer: Shows amount of time left for current player to make a move, if timer ends and no move is made then the current player will automatically lose and Game End Screen will display. \textbf{Priority 2}
+    \item Draw button: Sends draw request to other player. \textbf{Priority 2}
+    \item Forfeit button: Ends game and declares other player as winner. Navigates to Game End Screen. \textbf{Priority 2}
+    \item Pause button: Sends pause request to other player. \textbf{Priority 2}
+\end{itemize}
+
+\item Game End Screen - Declares winner and a Rematch text that has 2 buttons under it: Yes or No
+\begin{itemize}
+    \item Winner will be declared on this screen \textbf{Priority 1}
+    \item Yes button: Will display under "Rematch" text and navigate to Game Screen with new room code if selected. \textbf{Priority 2}
+    \item No button: Will display under "Rematch" text and navigate to Main Menu Screen if selected. \textbf{Priority 2}
+\end{itemize}
+
+\item Instructions Screen - Contains game instructions and a back button
+\begin{itemize}
+    \item Displays instructions on how to connect or create game. As well as rules for the game Checkers. \textbf{Priority 2} 
+    \item Back button: When clicked will return user back to Main Menu Screen. \textbf{Priority 2} 
+\end{itemize}
+
+\item Join Game Screen - Contains text box input that accepts a room code and a ready button
+\begin{itemize}
+    \item Room code text box will display and allow for alphanumeric input \textbf{Priority 1} 
+    \item Ready button: When clicked, will validate inputted room code and navigate to Game Screen if the code is valid \textbf{Priority 1} 
+\end{itemize}
+
+\item Pause Screen: Will contain 3 buttons: Ready Player 1, Ready Player 2, Return to Main Menu
+\begin{itemize}
+    \item Ready Player 1 button: When clicked current player will be set as Player 1 and button unselectable from other players screen. When other player has clicked Ready Player 2 button both screens will navigate to the Game Screen. \textbf{Priority 2}
+    \item Ready Player 2 button: When clicked current player will be set as Player 2 and button unselectable from other players screen. When other player has clicked Ready Player 1 button both screens will navigate to the Game Screen. \textbf{Priority 2}
+    \item Return to Main Menu Butoon: When clicked the player will be taken to the Main Menu Screen. \textbf{Priority 2}
+\end{itemize}
+
+\end{enumerate}
 
 \section{Standard Components}
 
@@ -286,7 +364,11 @@ The project shall use Python3? to create the user interface.
 	\item One player is assigned the black pieces and the other red.
 	\item Each player’s pieces start on opposite ends of the board, occupying every other space within the first three rows (for a total of 12 pieces for each player).
 	\subitem See attached image for an example checkers setup:
-	\subitem \includegraphics[width=8cm]{board.png}
+	\begin{figure}[h!]
+        \centering
+        \includegraphics[width=8cm]{board.png}
+        \caption{Example board, see reference 3}
+    \end{figure}
 	\item The black player starts the match by taking their turn.
 	\item During each turn, the active player selects a piece of their own to move according to the following rules:
 \begin{itemize}
@@ -323,6 +405,11 @@ W.J. Rayment,
 http://www.indepthinfo.com/checkers/history.shtml,
 2004.
 
+\bibitem{Checkers}
+Encyclopædia Britannica,
+\textit{Checkers},
+https://www.britannica.com/topic/checkers,
+2018
 \end{thebibliography}
 
 
