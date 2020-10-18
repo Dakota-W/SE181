@@ -157,6 +157,7 @@ both client-side and server-side, that allows remote users to play checkers. The
         \item Clients will be able to request a new game session from the server and be given a unique ID from the server.
         \item Clients will be able to connect to an existing game session by providing an unique ID to the server.
         \item Clients will not be able to connect to a game session with an incorrect unique ID.
+        \item Clients will be able to send moves to the server for validation if it is their turn.
         \item Clients will be able to pause a game session given approval from both clients.
         \item Clients will be able to leave from the game session without consequence should the game be paused.
         \item Clients will be able to leave from the game session regardless of game state other than paused, but will immediately concede the game.
@@ -183,20 +184,12 @@ both client-side and server-side, that allows remote users to play checkers. The
     \end{enumerate}
     \item Server - Client Interaction
     \begin{enumerate}[label*=\arabic*.]
-        \item Server will be able to process client connection information to create a lobby.
-        \item Server will keep track of clients and game sessions.
+        \item Server will keep track of active game sessions and active client connections.
         \item Server will keep track of time clients have spent on each move.
             \subitem Should a client go over specified time limit, initiate game loss state for that client.
-        
-        \item On user timeout, wait a set amount of time.
-            \subitem If not connected within that time, signal other client game has ended due to disconnected player.
         \item Server will validate moves before sending updated move to clients.
-            \subitem On invalid move, signal client that move was invalid and to try again.
-    \end{enumerate}
-    \item Server - Lobby Interaction
-    \begin{enumerate}[label*=\arabic*.]
-        \item Server will first check that a port is open before assigning it to a lobby upon creation.
-        \item Server will close the port assigned to a lobby when the game has been finished.
+            \subitem On invalid move, signal client that maove was invalid and to try again.
+        \item Server will validate win conditions and notify clients with win condition.
     \end{enumerate}
 \end{enumerate}
 

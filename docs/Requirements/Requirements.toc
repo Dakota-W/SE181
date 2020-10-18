@@ -19,10 +19,10 @@
 \contentsline {section}{\numberline {4}Other Requirements}{6}{section.4}%
 \contentsline {subsection}{\numberline {4.1}System Requirements}{6}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Network Requirements}{6}{subsection.4.2}%
-\contentsline {section}{\numberline {5}User Interface}{7}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Framework}{7}{subsection.5.1}%
+\contentsline {section}{\numberline {5}User Interface}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Framework}{6}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Menus}{7}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Standard Components}{8}{section.6}%
+\contentsline {section}{\numberline {6}Standard Components}{7}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Program Usage}{8}{subsection.6.1}%
 \contentsline {subsubsection}{\numberline {6.1.1}Gameplay}{8}{subsubsection.6.1.1}%
 \contentsline {subsubsection}{\numberline {6.1.2}Win Conditions}{9}{subsubsection.6.1.2}%
