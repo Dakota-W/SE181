@@ -169,13 +169,13 @@ both client-side and server-side, that allows remote users to play checkers. The
 \begin{enumerate}[label*=R\arabic*.]
     \item Client - Server Interaction
     \begin{enumerate}[label*=\arabic*.]
-        \item Clients will be able to request a new game session from the server and be given a unique ID from the server.
-        \item Clients will be able to connect to an existing game session by providing an unique ID to the server.
-        \item Clients will not be able to connect to a game session with an incorrect unique ID.
-        \item Clients will be able to send moves to the server for validation if it is their turn.
-        \item Clients will be able to pause a game session given approval from both clients.
-        \item Clients will be able to leave from the game session without consequence should the game be paused.
-        \item Clients will be able to leave from the game session regardless of game state other than paused, but will immediately concede the game.
+        \item Clients will be able to request a new game session from the server and be given a unique ID from the server. \textbf{Priority 1}
+        \item Clients will be able to connect to an existing game session by providing an unique ID to the server. \textbf{Priority 1}
+        \item Clients will not be able to connect to a game session with an incorrect unique ID. \textbf{Priority 1}
+        \item Clients will be able to send moves to the server for validation if it is their turn. \textbf{Priority 1}
+        \item Clients will be able to pause a game session given approval from both clients. \textbf{Priority 2}
+        \item Clients will be able to leave from the game session without consequence should the game be paused. \textbf{Priority 2}
+        \item Clients will be able to leave from the game session regardless of game state other than paused, but will immediately concede the game. \textbf{Priority 2}
     \end{enumerate}
 \end{enumerate}
 
@@ -184,8 +184,8 @@ both client-side and server-side, that allows remote users to play checkers. The
 \begin{enumerate}[resume*]
     \item Board
     \begin{enumerate}[label*=\arabic*.]
-        \item The clients will have a copy of the board for rendering purposes
-        \item The board will update upon receiving a server update
+        \item The clients will have a copy of the board for rendering purposes. \textbf{Priority 1}
+        \item The board will update upon receiving a server update. \textbf{Priority 1}
     \end{enumerate}
 \end{enumerate}
 
@@ -194,17 +194,17 @@ both client-side and server-side, that allows remote users to play checkers. The
 \begin{enumerate}[resume*]
     \item Server status
     \begin{enumerate}[label*=\arabic*.]
-        \item Server should be able to be run constantly without crashing.
-        \item Server will have a heartbeat function that will send an email to the developers if the server is down.
+        \item Server should be able to be run constantly without crashing. \textbf{Priority 1}
+        \item Server will have a heartbeat function that will send an email to the developers if the server is down. \textbf{Priority 2}
     \end{enumerate}
     \item Server - Client Interaction
     \begin{enumerate}[label*=\arabic*.]
-        \item Server will keep track of active game sessions and active client connections.
-        \item Server will keep track of time clients have spent on each move.
+        \item Server will keep track of active game sessions and active client connections. \textbf{Priority 1}
+        \item Server will keep track of time clients have spent on each move. \textbf{Priority 2}
             \subitem Should a client go over specified time limit, initiate game loss state for that client.
-        \item Server will validate moves before sending updated move to clients.
-            \subitem On invalid move, signal client that maove was invalid and to try again.
-        \item Server will validate win conditions and notify clients with win condition.
+        \item Server will validate moves before sending updated move to clients. \textbf{Priority 1}
+            \subitem On invalid move, signal client that move was invalid and to try again.
+        \item Server will validate win conditions and notify clients with win condition. \textbf{Priority 2}
     \end{enumerate}
 \end{enumerate}
 
