@@ -261,7 +261,7 @@ The ideal users for Checkers would be 2 players
             \subitem Should a client go over specified time limit, initiate game loss state for that client.
         \item Server will validate moves before sending updated move to clients. \textbf{Priority 1}
             \subitem On invalid move, signal client that move was invalid and to try again.
-        \item Server will validate win conditions and notify clients with win condition. \textbf{Priority 2}
+        \item Server will validate win conditions and notify clients with win condition. \textbf{Priority 1}
     \end{enumerate}
 \end{enumerate}
 
@@ -272,34 +272,34 @@ The ideal users for Checkers would be 2 players
 \begin{enumerate}[label*=N\arabic*.]
     \item Lag Management
 	 \begin{enumerate}[label*=\arabic*.]
-        \item Lag will be based off how stable the network connection of the computer the user is on. If network connection is table, there should be little to no lag. It should not negatively affect the game. Lag management will also be tested during the playtesting phase to ensure game quality.
+        \item Lag will be based off how stable the network connection of the computer the user is on. If network connection is table, there should be little to no lag. It should not negatively affect the game. Lag management will also be tested during the playtesting phase to ensure game quality. \textbf{Priority 2}
 	  \end{enumerate}
 \end{enumerate}
 
 \subsection{Host Operating System Requirements}
 
 \begin{enumerate}[label*=S\arabic*.]
-    \item Server
-        \subitem Node.js to allow the client and the server to communicate through endpoints
+    \item Server \textbf{Priority 1}
+        \subitem Node.js to allow the client and the server to communicate through endpoints 
         \subitem SQLite is used to store the generated key identifiers so that players can use that keycode to enter a room
-    \item Client
+    \item Client \textbf{Priority 1}
         \subitem Support Desktop Browsers
-            \subsubitem Google Chrome (latest stable version)
-            \subsubitem Firefox (latest stable version)
-            \subsubitem Microsoft Edge (latest stable version)
-            \subsubitem Microsoft Internet Explorer 11
+            \subsubitem Google Chrome (latest stable version) \textbf{Priority 1}
+            \subsubitem Firefox (latest stable version) \textbf{Priority 2}
+            \subsubitem Microsoft Edge (latest stable version) \textbf{Priority 2}
+            \subsubitem Microsoft Internet Explorer 11 \textbf{Priority 2}
 \end{enumerate}
 
 \subsection{Accessibility}
 
 \begin{enumerate}[label*=N\arabic*.]
-    \item The application will be accessible through URL on the web browser
+    \item The application will be accessible through URL on the web browser \textbf{Priority 1}
 \end{enumerate}
 
 \subsection{Playtesting}
 
 \begin{enumerate}[label*=N\arabic*.]
-    \item After the prototype is completed, the game will then undergo playtesting with approximately 8 people of any age, 4 being familiar with Checkers and 4 with the purpose of attempting to break the game. This way, it will test all aspects of the rules of Checkers and see if the game will run smoothly and correctly. It will also see if any moves that are not in the regulations of Checkers are being permitted within the game. Also it will see if players face little difficulty with the controls and understanding of our prototype. The game will be playtested near the end of Drexel Fall Quarter of 2020. After each playtesting session, the participants will fill out a form that helps answer the findings that we are testing for. The forms will be reviewed by the team. 
+    \item After the prototype is completed, the game will then undergo playtesting with approximately 8 people of any age, 4 being familiar with Checkers and 4 with the purpose of attempting to break the game. This way, it will test all aspects of the rules of Checkers and see if the game will run smoothly and correctly. It will also see if any moves that are not in the regulations of Checkers are being permitted within the game. Also it will see if players face little difficulty with the controls and understanding of our prototype. The game will be playtested near the end of Drexel Fall Quarter of 2020. After each playtesting session, the participants will fill out a form that helps answer the findings that we are testing for. The forms will be reviewed by the team. \textbf{Priority 2}
 \end{enumerate}
 \pagebreak
 \section{User Interface}
