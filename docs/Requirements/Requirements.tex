@@ -82,22 +82,27 @@
 
 \subsection{Purpose of Document}
 The goal of this document is to outline the requirement specifications of our web-based checkers game. 
-This application will allow two users to connect and interact remotely, allowing them to play and chat. 
+This application will allow two users to connect and interact remotely, allowing them to play and chat.
+The application will follow the standard U.S. rules of American checkers. 
 This document will cover the scope, objective, basic requirements, and goals for this application. 
 After the application's high-level look, this document will dive deeper into topics like functional, 
 non-functional, user interface, design, test cases, program usage, and references. 
 This document will clearly explain to an engineer or end-user the overall implementation 
-and goals of our application.
+and goals of our application. The final version of the game will be playable through the network. Therefore, 
+two players on the web browser will be able to play against each other.
 
 \subsection{Project Scope}
 The main objective for documentation is to educate the reader about our Checkers application, 
 its functionality, the technologies used, and outline the application requirements.
+The document will capture the basic concept of the game with its functional and non-functional requirements. 
+Each player’s inputs will follow a guideline of possible use cases that is linked with the GUI as well providing a description of each.
 
 \subsection{Overview of Document}
 The documentation will provide a clear explanation about which technologies we used, 
 how we implemented them, and why we chose to use them. It will outline each component 
 of our application. The flow starts with the functional requirements, non-functional requirements, 
-user interface, and finished with lobbies, gameplay, and winning conditions, concluding with our references. 
+user interface, and finished with lobbies, gameplay, and winning conditions, concluding with our references.
+The document will contain diagrams of a mock-up workflow of the possible use cases and a navigation flow, which may be changed throughout the process. 
 
 \subsection{Background}
 
@@ -109,10 +114,12 @@ is present-day Iraq. Later in Egypt, in 1400 B.C, the game was played using a 5 
 However, the version of Checkers that we know of today was established in the mid-1500s by an English mathematician. 
 Now the board game of checkers is cemented as one of the most popular board games of all time. 
 \subsubsection{Game Rules}
-    The rules provided are from the American Checker Federation \cite {checkersFoundation}.
+    The rules provided will follow the American Checker Federation and Standard U.S. rules. \cite {checkersFoundation}.
     \begin{enumerate}
-    \item Red always makes the first move.
+    \item The first turn will be decided by a randomized generator.
     \item A player can forfeit at any time; as a result, the opponent wins.
+    \item Each player is given 5 minutes to make a move. If the player fails to move within the time limit, the player that failed to move loses the game.
+    \item A player can request a draw anytime. If a player requests a draw, and the opposing also requests it, the game will result in a draw. The draw request doesn’t have a time limit. It’ll act as an on and off switch, but each player will be notified of a request for a draw.
     \end{enumerate}
 \subsubsection{Moves} 
 \begin{enumerate}
@@ -131,6 +138,10 @@ Now the board game of checkers is cemented as one of the most popular board game
 \begin{enumerate}
     \item When one player has no more pieces to move, the other player is the winner.
     \item If a player forfeits the match, the other player is conceded the winner.
+    \item If both players request a draw, the match will result in a tie.
+    \item If a player fails to make a turn before the timer ends, they lose.
+    \item If a player puts the opposing player in a position where they cannot make a legal move for any pieces in the following turn, player A wins.
+    \item If a player captures all the opposing player pieces, they win.
 \end{enumerate}
 
 \subsection{Abstract}
@@ -365,11 +376,7 @@ The ideal users for Checkers would be 2 players
 	\item One player is assigned the black pieces and the other red.
 	\item Each player’s pieces start on opposite ends of the board, occupying every other space within the first three rows (for a total of 12 pieces for each player).
 	\subitem See attached image for an example checkers setup:
-	\begin{figure}[h!]
-        \centering
-        \includegraphics[width=8cm]{board.png}
-        \caption{Example board, see reference 3}
-    \end{figure}
+	\subitem \includegraphics[width=8cm]{board.png}
 	\item The black player starts the match by taking their turn.
 	\item During each turn, the active player selects a piece of their own to move according to the following rules:
 \begin{itemize}
@@ -384,12 +391,78 @@ The ideal users for Checkers would be 2 players
 
 \item When a non-king piece has reached the edge of the board opposite its color’s starting side, that piece will be crowned and turned into a king, allowing it to move in any direction.
 \end{enumerate}
-\subsubsection{Win Conditions}
+
+\subsubsection{Use Case Flow}
+\begin{enumerate}
+    \item Creating a game
+        \subitem Precondition: The user is on the menu screen.
+        \subitem Action: The user presses the Create Game button.
+        \subitem Postcondition: The user will be led to the board screen where it will contain both non-game related and game elements.
+    \item Joining a game
+        \subitem Precondition: The user is on the menu screen and will need to be provided a unique identifier from the other player to join the match. The user will also need to be on the menu screen.
+        \subitem Action: The user presses the Join Game button in the menu screen.
+        \subitem Postcondition: On the menu screen, a text box will pop up prompting the user to type in the unique identifier to join the match.
+            \subsubitem If the unique identifier is valid, it will lead the user to the board screen where the host is also located in.
+            \subsubitem If the unique identifier is not valid, the user will stay on the menu screen and will be prompted to try again with a valid identifier.
+    \item Instructions
+        \subitem Precondition: The user is on the menu screen.
+        \subitem Action: The user presses the Instruction button.
+        \subitem Postcondition: On the menu screen, a text box will pop up providing the rules and how to start/join a game. The user will be provided only one button to close out the instruction text box.
+    \item Starting a game
+        \subitem Precondition: Both users are on the board screen.
+        \subitem Action: Both users press the ready button.
+        \subitem Postcondition: A text box pops up in the middle of the screen and randomly generates who goes first and will shortly disappear in a couple of seconds. Then the game starts.
+    \item Pause the game (non-game element)
+        \subitem Precondition: Both users are on the board screen and the game is started.
+        \subitem Action: Both players press the pause button.
+        \subitem Postcondition: A textbox for both players is populated given a time until the game is resumed. The timer screen will popup providing the user countdown timer and a button to resume. The screen will disappear only if the timer countdown hits 0 or both players hit the resume button on the timer screen.
+    \item Timer for turn (non-game element)
+        \subitem Precondition: Both users are on the board screen and the game is started.
+        \subitem Action: The timer ends or a player uses the turn before the timer ends.
+        \subitem Postcondition: The timer is reset for the next turn.
+    \item Requesting a Rematch
+        \subitem Precondition: If the board state has reached a draw, defeat, and victory for any player and neither players have left the board screen.
+        \subitem Action: Both players are provided a Yes or No button.
+        \subitem Postcondition:
+            \subsubitem If both players press the Yes Button the match will restart, resetting the board to its initial state as if the game has just been created.
+            \subsubitem If one player presses the No Button, both users will return to the menu screen after a short count down.
+    \item Moving a checker piece
+        \subitem Precondition: It must be a current player’s active turn and the game is started.
+        \subitem Action: The player presses a piece that is movable and then presses again for the desired space.
+        \subitem Postcondition:
+            \subsubitem If it’s an empty space, the user will be allowed to move the desired space otherwise nothing happens. Then the active turn for that user is over while resetting the timer.
+            \subsubitem If there’s an enemy piece and there is a diagonal empty space on the enemy’s side, the user will move the empty space. The enemy piece is removed and checks if there is another enemy piece to make an additional jump.
+            \subsubitem If a regular piece has reached the edge of the opposite board, it will change to a king piece and be allowed to move in any direction. Either the user will have the option to do another jump if there is another enemy piece or The user can end it’s turn and not commit to the additional jump.
+        \subitem Then the active turn for that user is over while resetting the timer.
+    \item Regular and King pieces Notes
+        \subitem Regular pieces can only make forward single and additional jumps.
+        \subitem King pieces can may both forward and backward single and additional jumps.
+        \subitem Pieces of the same colors cannot be jumped over.
+    \item Completing a match
+        \subitem Precondition:
+            \subsubitem If either users cannot make any moves on the board screen or have any pieces left.
+            \subsubitem If the match gives results to both users a win, lose, or draw.
+        \subitem Action: Both users wait temporarily for a textbox to notify the win/lose/draw results to each player.
+        \subitem Postcondition: The rematch request is triggered as well as the populating results whether the users win, lose, or resulted in a draw.
+\end{enumerate}
+
+\subsubsection{Game Completion Conditions}
 
 \begin{enumerate}
     \item If player A has no more pieces, player B is the winner and vice versa.
     \item If player A disconnects, player B is the winner and vice versa.
+    \item If player A forfeits, player B is the winner and vice versa.
+    \item If both players request a draw, the game is concluded with a draw.
+    \item If player A can no longer make a move in their turn, player B is the winner and vice versa.
+    \item If player A can fail to make a move before the timer ends, player B is the winner and vice versa.
 \end{enumerate}
+
+\subsubsection{Activity Diagram}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=16cm]{UseCaseDiagram.png}
+    \caption{Activity Diagram for the use cases.}
+\end{figure}
 
 
 \begin{thebibliography}{9}
