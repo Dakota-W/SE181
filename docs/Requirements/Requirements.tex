@@ -215,11 +215,13 @@ The ideal users for Checkers would be 2 players
 \begin{enumerate}[label*=R\arabic*.]
     \item Client - Server Interaction
     \begin{enumerate}[label*=\arabic*.]
-        \item Client will automatically check to see if the game server is live given the set URL in the program.
-        \item Client will not be able to join a lobby if no response is sent from the requested server URL.
-        \item Client will be able to terminate itself from the server at any given moment.
-        \item Client will be able to reconnect back to the lobby within 30 seconds, else they will receive a notification saying that the lobby has been closed and they are unable to rejoin due to the timeout period.
-        \item Client should be able to distinguish themselves with a valid player name when they join a lobby.
+        \item Clients will be able to request a new game session from the server and be given a unique ID from the server. \textbf{Priority 1}
+        \item Clients will be able to connect to an existing game session by providing an unique ID to the server. \textbf{Priority 1}
+        \item Clients will not be able to connect to a game session with an incorrect unique ID. \textbf{Priority 1}
+        \item Clients will be able to send moves to the server for validation if it is their turn. \textbf{Priority 1}
+        \item Clients will be able to pause a game session given approval from both clients. \textbf{Priority 2}
+        \item Clients will be able to leave from the game session without consequence should the game be paused. \textbf{Priority 2}
+        \item Clients will be able to leave from the game session regardless of game state other than paused, but will immediately concede the game. \textbf{Priority 2}
     \end{enumerate}
 \end{enumerate}
 
@@ -228,29 +230,27 @@ The ideal users for Checkers would be 2 players
 \begin{enumerate}[resume*]
     \item Board
     \begin{enumerate}[label*=\arabic*.]
-        \item The clients will have a copy of the board for rendering purposes
-        \item The board will update upon receiving a server update
+        \item The clients will have a copy of the board for rendering purposes. \textbf{Priority 1}
+        \item The board will update upon receiving a server update. \textbf{Priority 1}
     \end{enumerate}
 \end{enumerate}
 
 \subsection{Server}
 
 \begin{enumerate}[resume*]
-    \item Server should be able to be run constantly without crashing.
-        \subitem Server will have a heartbeat function that will send an email to the developers if the server is down.
+    \item Server status
+    \begin{enumerate}[label*=\arabic*.]
+        \item Server should be able to be run constantly without crashing. \textbf{Priority 1}
+        \item Server will have a heartbeat function that will send an email to the developers if the server is down. \textbf{Priority 2}
+    \end{enumerate}
     \item Server - Client Interaction
     \begin{enumerate}[label*=\arabic*.]
-        \item Server will be able to process client connection information to create a lobby.
-        \item Server will keep track of clients and game sessions.
-        \item On user timeout, wait a set amount of time.
-            \subitem If not connected within that time, signal other client game has ended due to disconnected player.
-        \item Server will validate moves before sending updated move to clients.
+        \item Server will keep track of active game sessions and active client connections. \textbf{Priority 1}
+        \item Server will keep track of time clients have spent on each move. \textbf{Priority 2}
+            \subitem Should a client go over specified time limit, initiate game loss state for that client.
+        \item Server will validate moves before sending updated move to clients. \textbf{Priority 1}
             \subitem On invalid move, signal client that move was invalid and to try again.
-    \end{enumerate}
-    \item Server - Lobby Interaction
-    \begin{enumerate}[label*=\arabic*.]
-        \item Server will first check that a port is open before assigning it to a lobby upon creation.
-        \item Server will close the port assigned to a lobby when the game has been finished.
+        \item Server will validate win conditions and notify clients with win condition. \textbf{Priority 2}
     \end{enumerate}
 \end{enumerate}
 
