@@ -1,0 +1,99 @@
+.red_square {
+    text-align: center;
+    align-items: center;
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+}
+
+.black_square {
+    text-align: center;
+    align-items: center;
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    position: relative;
+}
+
+.white_circle {
+    border: 3px solid #FFF;
+    border-radius: 18px;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 20%;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    line-height: 50px;
+    user-select: none;
+}
+
+.blue_circle {
+    border: 3px solid blue;
+    border-radius: 18px;
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 20%;
+    cursor: pointer;
+    text-align: center;
+    color: blue;
+    font-size: large;
+    font-weight: bold;
+    line-height: 50px;
+    user-select: none;
+}
+
+.red_piece {
+    border: 3px solid #FFF;
+    border-radius: 18px;
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 20%;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    line-height: 50px;
+    user-select: none;
+}
+
+.black_piece {
+    border: 3px solid #FFF;
+    border-radius: 18px;
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 20%;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    line-height: 50px;
+    user-select: none;
+}
+
+.grid-container {
+    display: grid;
+}

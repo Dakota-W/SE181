@@ -1,0 +1,112 @@
+<html>
+    <link rel="stylesheet" href="Game.css">
+    <script type="text/javascript" src="Game.js"></script>
+    <body onload=getPlayer()>
+        <div style="margin-top: 2%;text-align:center;font-size: 60;">Checkers</div>
+        <div style="text-align: center;">
+            <div>
+                <text id="Turn"></text>
+            </div>
+        </div>
+        <div style="float:right;">
+            <div>
+                <text style="font-size: 40;">GameCode Filler</text>
+            </div>    
+            <div>
+                <text style="position: absolute; bottom: 20%; font-size: 40;">Timer Filler</text>
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="grid-item">
+                <div class="red_square" id="0,0"></div>
+                <div class="black_square" id="0,1"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="0,2"></div>
+                <div class="black_square" id="0,3"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="0,4"></div>
+                <div class="black_square" id="0,5"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="0,6"></div>
+                <div class="black_square" id="0,7"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+            </div>
+
+            <div class="grid-item">
+                <div class="black_square" id="1,0"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="1,1"></div>
+                <div class="black_square" id="1,2"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="1,3"></div>
+                <div class="black_square" id="1,4"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="1,5"></div>
+                <div class="black_square" id="1,6"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="1,7"></div>
+            </div>
+            
+            <div class="grid-item">
+                <div class="red_square" id="2,0"></div>
+                <div class="black_square" id="2,1"><div class="red_piece" onclick="displayMoves(this)">K</div></div>
+                <div class="red_square" id="2,2"></div>
+                <div class="black_square" id="2,3"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="2,4"></div>
+                <div class="black_square" id="2,5"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="2,6"></div>
+                <div class="black_square" id="2,7"><div class="red_piece" onclick="displayMoves(this)"></div></div>
+            </div>
+
+            <div class="grid-item">
+                <div class="black_square" id="3,0"></div>
+                <div class="red_square" id="3,1"></div>
+                <div class="black_square" id="3,2"></div>
+                <div class="red_square" id="3,3"></div>
+                <div class="black_square" id="3,4"></div>
+                <div class="red_square" id="3,5"></div>
+                <div class="black_square" id="3,6"></div>
+                <div class="red_square" id="3,7"></div>
+            </div>
+
+            <div class="grid-item">
+                <div class="red_square" id="4,0"></div>
+                <div class="black_square" id="4,1"></div>
+                <div class="red_square" id="4,2"></div>
+                <div class="black_square" id="4,3"></div>
+                <div class="red_square" id="4,4"></div>
+                <div class="black_square" id="4,5"></div>
+                <div class="red_square" id="4,6"></div>
+                <div class="black_square" id="4,7"></div>
+            </div>
+
+            <div class="grid-item">
+                <div class="black_square" id="5,0"><div class="black_piece" onclick="displayMoves(this)">K</div></div>
+                <div class="red_square" id="5,1"></div>
+                <div class="black_square" id="5,2"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="5,3"></div>
+                <div class="black_square" id="5,4"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="5,5"></div>
+                <div class="black_square" id="5,6"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="5,7"></div>
+            </div>
+
+            <div class="grid-item">
+                <div class="red_square" id="6,0"></div>
+                <div class="black_square" id="6,1"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="6,2"></div>
+                <div class="black_square" id="6,3"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="6,4"></div>
+                <div class="black_square" id="6,5"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="6,6"></div>
+                <div class="black_square" id="6,7"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+            </div>
+
+            <div class="grid-item">
+                <div class="black_square" id="7,0"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="7,1"></div>
+                <div class="black_square" id="7,2"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="7,3"></div>
+                <div class="black_square" id="7,4"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="7,5"></div>
+                <div class="black_square" id="7,6"><div class="black_piece" onclick="displayMoves(this)"></div></div>
+                <div class="red_square" id="7,7"></div>
+            </div>
+        </div>
+    </body>
+    <div>
+        <button onclick="window.location='Main.html'">Back</button>
+    </div>
+</html>
