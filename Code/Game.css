@@ -75,6 +75,25 @@
     user-select: none;
 }
 
+.red_piece_attk{
+    border: 3px solid orange;
+    border-radius: 18px;
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 20%;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    line-height: 50px;
+    user-select: none;
+}
+
 .black_piece {
     border: 3px solid #FFF;
     border-radius: 18px;
@@ -92,6 +111,30 @@
     font-weight: bold;
     line-height: 50px;
     user-select: none;
+}
+
+.black_piece_attk {
+    border: 3px solid orange;
+    border-radius: 18px;
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 20%;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    line-height: 50px;
+    user-select: none;
+}
+
+mark.red {
+    color:#ff0000;
+    background: none;
 }
 
 .grid-container {
