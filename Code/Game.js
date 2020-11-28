@@ -33,10 +33,10 @@ function checkMoves() {
         }
     }
 
-    if (document.getElementsByClassName(".black_piece").length == 0) {
+    if (document.getElementsByClassName("black_piece").length == 0) {
         alert("Black WINS");
         window.location("Main.html");
-    } else if (document.getElementsByClassName(".red_piece").length == 0) {
+    } else if (document.getElementsByClassName("red_piece").length == 0) {
         alert("RED WINS");
         window.location("Main.html");
     }
