@@ -13,6 +13,7 @@ function getPlayer() {
 }
 
 function checkMoves() {
+    getPlayer();
     if (check == false) {
         check = true;
         if (Turn == "Red") {
@@ -33,6 +34,23 @@ function checkMoves() {
         }
     }
 
+    //Checking if piece can be king'd
+    document.querySelectorAll(".red_piece").forEach(function (x) {
+        var Position = x.parentNode.id
+        var curRow = parseInt(String(Position).charAt(0));
+        if (curRow == 7) {
+            x.innerHTML = "K"
+        }
+    })
+    document.querySelectorAll(".black_piece").forEach(function (x) {
+        var Position = x.parentNode.id
+        var curRow = parseInt(String(Position).charAt(0));
+        if (curRow == 0) {
+            x.innerHTML = "K"
+        }
+    })
+
+    //Win condition
     if (document.getElementsByClassName("black_piece").length == 0) {
         alert("Black WINS");
         window.location("Main.html");
@@ -40,7 +58,6 @@ function checkMoves() {
         alert("RED WINS");
         window.location("Main.html");
     }
-    getPlayer();
 }
 
 function displayMoves(element, repeatAttack = false) {
@@ -350,7 +367,12 @@ function take(element) {
     document.getElementById(oppPos).firstChild.remove()
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
-    if (displayMoves(document.getElementById(curPos).firstChild, true) != true) {
+    check = false
+    checkMoves()
+    if (document.getElementsByClassName("blue_circle").length > 0){
+        displayMoves(document.getElementById(curPos).firstChild, true)
+    }
+    else{
         if (Turn == "Red") {
             Turn = "Black";
             check = false;
@@ -358,77 +380,7 @@ function take(element) {
             Turn = "Red";
             check = false;
         }
-    }
-    checkMoves()
-}
-
-function test() {
-
-}
-
-
-function canTake() {
-    console.log(Turn)
-    if (Turn == "Red") {
-        var canTake = []
-        document.querySelectorAll(".red_piece").forEach(function (element) {
-            var Position = element.parentNode.id; //This is the coordinates from parent div
-            var curRow = parseInt(String(Position).charAt(0));
-            var curCol = parseInt(String(Position).charAt(2));
-
-            let Moves = [];
-            Moves.push([curRow - 1, curCol + 1]);
-            Moves.push([curRow + 1, curCol + 1]);
-            Moves.push([curRow - 1, curCol - 1]);
-            Moves.push([curRow + 1, curCol - 1]);
-            Moves.forEach(function (item) {
-                let row = item[0];
-                let col = item[1];
-                if (!(row < 0 | row > 7 | col < 0 | col > 7)) {
-                    let pos = row.toString() + "," + col.toString();
-                    let square = document.getElementById(pos);
-                    if (square.firstChild != null) {
-                        if (square.firstChild.className == "black_piece") {
-                            canTake.push(element);
-                            return true;
-                        }
-                    }
-                }
-            })
-        })
-    } else if (Turn == "Black") {
-        var canTake = []
-        document.querySelectorAll(".black_piece").forEach(function (element) {
-            var Position = element.parentNode.id; //This is the coordinates from parent div
-            var curRow = parseInt(String(Position).charAt(0));
-            var curCol = parseInt(String(Position).charAt(2));
-
-            let Moves = [];
-            Moves.push([curRow - 1, curCol + 1]);
-            Moves.push([curRow + 1, curCol + 1]);
-            Moves.push([curRow - 1, curCol - 1]);
-            Moves.push([curRow + 1, curCol - 1]);
-            Moves.forEach(function (item) {
-                let row = item[0];
-                let col = item[1];
-                if (!(row < 0 | row > 7 | col < 0 | col > 7)) {
-                    let pos = row.toString() + "," + col.toString();
-                    let square = document.getElementById(pos);
-                    if (square.firstChild != null) {
-                        if (square.firstChild.className == "red_piece") {
-                            canTake.push(element);
-                            return true;
-                        }
-                    }
-                }
-            })
-        })
-    }
-    console.log(canTake)
-    if (canTake.length > 0) {
-        canTake.forEach(function (element) {
-            element.click()
-        })
+        checkMoves()
     }
 }
 
