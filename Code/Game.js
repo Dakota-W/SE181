@@ -12,7 +12,7 @@ function getPlayer() {
     document.getElementById("Turn").innerHTML = String;
 }
 
-function checkMoves() {
+function checkMoves(LastMove = false) {
     getPlayer();
     if (check == false) {
         check = true;
@@ -51,12 +51,15 @@ function checkMoves() {
     })
 
     //Win condition
-    if (document.getElementsByClassName("black_piece").length == 0) {
-        alert("Black WINS");
-        window.location("Main.html");
-    } else if (document.getElementsByClassName("red_piece").length == 0) {
-        alert("RED WINS");
-        window.location("Main.html");
+    if (LastMove == true){
+        console.log(document.querySelector(".black_piece"))
+        if (document.querySelector(".black_piece") == null) {
+            alert("Red WINS");
+            window.location='Rematch.html';
+        } else if (document.querySelector(".red_piece") == null) {
+            alert("Black WINS");
+            window.location='Rematch.html';
+        }
     }
 }
 
@@ -343,7 +346,7 @@ function move(element) {
         Turn = "Red"
         check = false;
     }
-    checkMoves()
+    checkMoves(true)
 }
 
 function take(element) {
@@ -380,7 +383,7 @@ function take(element) {
             Turn = "Red";
             check = false;
         }
-        checkMoves()
+        checkMoves(true)
     }
 }
 
