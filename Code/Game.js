@@ -260,3 +260,26 @@ function take(element) {
 
     //set turn here maybe?
 }
+
+function displayTimer() {
+    // Set start time
+    var startTime = new Date().getTime();
+    
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+    
+      // Get current time
+      var currentTime = new Date().getTime();
+        
+      // Find the time difference
+      var timeDifference = currentTime - startTime;
+        
+      // Time calculations for hours, minutes and seconds
+      var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        
+      // Output timer
+      document.getElementById("Timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+    }, 1000);
+}
