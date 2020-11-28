@@ -1,9 +1,10 @@
 <html>
     <link rel="stylesheet" href="Game.css">
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="Game.js"></script>
     <body onload=getPlayer()>
-        <div style="margin-top: 2%;text-align:center;font-size: 60;">Checkers</div>
-        <div style="text-align: center;">
+        <div style="margin-top: 2%;text-align:left;font-size: 60;">Checkers</div>
+        <div style="text-align: left;">
             <div>
                 <text id="Turn"></text>
             </div>
@@ -13,7 +14,7 @@
                 <text style="font-size: 40;">GameCode Filler</text>
             </div>    
             <div>
-                <text id="Timer" style="position: absolute; bottom: 20%; font-size: 40;"> </text>
+                <text id="Timer" style="position: absolute; bottom: 20%; font-size: 40;"></text>
                 <script>
                     displayTimer();
                 </script>
@@ -110,6 +111,6 @@
         </div>
     </body>
     <div>
-        <button onclick="window.location='Main.html'">Back</button>
+        <span class="button" onclick="window.location='Main.html'">Back</span>
     </div>
 </html>
