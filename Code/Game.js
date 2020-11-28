@@ -4,11 +4,10 @@ var check = false;
 function getPlayer() {
     //Node.js Here to set Player Number
 
-    if (Turn == "Red"){
-        var String = "It is currently <mark class='red'><u><b>"+ Turn +"'s</b></u></mark> turn.";
-    }
-    else if (Turn == "Black"){
-        var String = "It is currently <u><b>"+ Turn +"'s</b></u> turn.";
+    if (Turn == "Red") {
+        var String = "It is currently <mark class='red'><u><b>" + Turn + "'s</b></u></mark> turn.";
+    } else if (Turn == "Black") {
+        var String = "It is currently <u><b>" + Turn + "'s</b></u> turn.";
     }
     document.getElementById("Turn").innerHTML = String;
 }
@@ -33,8 +32,13 @@ function checkMoves() {
             })
         }
     }
-    if (document.querySelectorAll(".red_piece").length == 0){
-        var String = "<u><b>Black Wins</b></u>"
+
+    if (document.getElementsByClassName(".black_piece").length == 0) {
+        alert("Black WINS");
+        window.location("Main.html");
+    } else if (document.getElementsByClassName(".red_piece").length == 0) {
+        alert("RED WINS");
+        window.location("Main.html");
     }
     getPlayer();
 }
@@ -49,8 +53,7 @@ function displayMoves(element, repeatAttack = false) {
     var type = element.innerHTML; //King or Not
     var curRow = parseInt(String(Position).charAt(0));
     var curCol = parseInt(String(Position).charAt(2));
-    console.log(String(element.className).includes(Turn))
-    if (String(element.className).includes(Turn)) {
+    if (String(element.className).includes(Turn.toLowerCase())) {
         if (type == "K") {
             let Moves = [];
             let possibleMoves = [];
@@ -432,22 +435,22 @@ function canTake() {
 function displayTimer() {
     // Set start time
     var startTime = new Date().getTime();
-    
+
     // Update the count down every 1 second
-    var x = setInterval(function() {
-    
-      // Get current time
-      var currentTime = new Date().getTime();
-        
-      // Find the time difference
-      var timeDifference = currentTime - startTime;
-        
-      // Time calculations for hours, minutes and seconds
-      var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-        
-      // Output timer
-      document.getElementById("Timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+    var x = setInterval(function () {
+
+        // Get current time
+        var currentTime = new Date().getTime();
+
+        // Find the time difference
+        var timeDifference = currentTime - startTime;
+
+        // Time calculations for hours, minutes and seconds
+        var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        // Output timer
+        document.getElementById("Timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
     }, 1000);
 }
