@@ -202,3 +202,7 @@ mark.red {
     transform: scale(0);
     transition-property: transform,opacity;
 }
+
+#header h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
