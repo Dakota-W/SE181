@@ -1,0 +1,14 @@
+p, li{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h3, h2.row{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+#header {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+button{
+    width: 80%;
+    height: 70px;
+    margin: 20px;
+}
