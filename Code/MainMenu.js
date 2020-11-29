@@ -32,4 +32,5 @@ function createGame() {
         }
     console.log(generatedResult)
     socket.emit('join',generatedResult);
+    socket.emit('gameID',generatedResult);
 }

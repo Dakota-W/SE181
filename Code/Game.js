@@ -380,10 +380,11 @@ function take(element) {
 
 function sendMove(){
     var boardState = document.getElementById("gameboard").innerHTML;
-    socket.emit('board', boardState, RoomCode);
+
+    socket.emit('board', [boardState, Turn, check], RoomCode);
     socket.on('board', function(board){
         console.log("received");
-        document.getElementById("gameboard").innerHTML = board;
+        document.getElementById("gameboard").innerHTML = board[0];
     });
     
     socket.emit('globals', [Turn, check], RoomCode)
