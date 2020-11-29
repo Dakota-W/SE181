@@ -45,5 +45,9 @@ function createGame() {
         }
     console.log(generatedResult)
     socket.emit('join',generatedResult);
+<<<<<<< HEAD
     window.location="Game.html?roomCode="+generatedResult;
+=======
+    socket.emit('gameID',generatedResult);
+>>>>>>> vq
 }

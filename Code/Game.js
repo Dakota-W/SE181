@@ -425,6 +425,7 @@ function take(element) {
 
 function sendMove() {
     var boardState = document.getElementById("gameboard").innerHTML;
+<<<<<<< HEAD
     socket.emit('board', boardState, RoomCode);
     socket.on('board', function (board) {
         console.log("received");
@@ -435,6 +436,15 @@ function sendMove() {
     socket.on('globals', function (globals) {
         Turn = globals[0];
         check = globals[1];
+=======
+
+    socket.emit('board', [boardState, Turn, check], RoomCode);
+    socket.on('board', function(board){
+        console.log("received");
+        document.getElementById("gameboard").innerHTML = board[0];
+        Turn = globals[1];
+        check = globals[2];
+>>>>>>> vq
         getPlayer();
     });
 }
@@ -467,4 +477,13 @@ function displayTimer() {
         // Output timer
         document.getElementById("Timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
     }, 1000);
-}
+}<<<<<<< HEAD
+=======
+
+    socket.emit('board', [boardState, Turn, check], RoomCode);
+    socket.on('board', function(board){
+        console.log("received");
+        document.getElementById("gameboard").innerHTML = board[0];
+        Turn = globals[1];
+        check = globals[2];
+>>>>>>> vq
