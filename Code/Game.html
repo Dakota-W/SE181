@@ -10,7 +10,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="Game.js"></script>
-        <title>Checkers - </title><!-- Add variable of the game session to title-->
+        <title>Checkers</title><!-- Add variable of the game session to title-->
 
 
     </head>
@@ -123,11 +123,11 @@
                     </div>
                 </div>
                 <div class="col-sm-2" style="height: 100%; border-color:black; border-style: solid;">
-                    <div class="container" >
-                        <input type="text" class="row" id="RoomCode" style="margin-bottom: 5%;"></input>
-                        <input type="button" onclick="setSession()"></input>
-                        <div class="row">
-                            <p id="Timer" style="position: absolute; bottom: 20%; font-size: 40;"></p>
+                    <div class="side-menu" >
+                        <input type="text" class="row" id="RoomCode" style="margin-bottom: 10%;"></input>
+                        <span class="button" style="margin-bottom: 10%;" onclick="setSession()">Set Session</span>
+                        <div class="row" style="margin-bottom: 20%; margin-left: 3%;">
+                            <p id="Timer" style="position: absolute; font-size: 40;">0h 0m 0s</p>
                             <script>
                                 displayTimer();
                             </script>
