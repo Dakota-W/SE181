@@ -17,26 +17,30 @@ function start(){
     sendMove()
 }
 
-function checkMoves(LastMove = false) {
+function checkMoves(LastMove = false, element = null) {
     getPlayer();
     console.log("Rn");
-    if (check == false) {
-        check = true;
-        if (Turn == "Red") {
-            document.querySelectorAll(".red_piece").forEach(function (x) {
-                displayMoves(x);
-            })
-            document.querySelectorAll('.white_circle').forEach(function (x) {
-                x.remove();
-            })
-        }
-        if (Turn == "Black") {
-            document.querySelectorAll(".black_piece").forEach(function (x) {
-                displayMoves(x);
-            })
-            document.querySelectorAll('.white_circle').forEach(function (x) {
-                x.remove();
-            })
+    if (element != null){
+        displayMoves(element,true);
+    } else{
+        if (check == false) {
+            check = true;
+            if (Turn == "Red") {
+                document.querySelectorAll(".red_piece").forEach(function (x) {
+                    displayMoves(x);
+                })
+                document.querySelectorAll('.white_circle').forEach(function (x) {
+                    x.remove();
+                })
+            }
+            if (Turn == "Black") {
+                document.querySelectorAll(".black_piece").forEach(function (x) {
+                    displayMoves(x);
+                })
+                document.querySelectorAll('.white_circle').forEach(function (x) {
+                    x.remove();
+                })
+            }
         }
     }
 
@@ -378,7 +382,7 @@ function take(element) {
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
     check = false
-    checkMoves()
+    checkMoves(false,document.getElementById(oriPos).firstChild)
     if (document.getElementsByClassName("blue_circle").length > 0){
         displayMoves(document.getElementById(curPos).firstChild, true)
     }
