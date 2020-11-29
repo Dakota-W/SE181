@@ -7,13 +7,15 @@
         <link rel="stylesheet" href="Game.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="Game.js"></script>
         <title>Checkers - </title><!-- Add variable of the game session to title-->
 
 
     </head>
     <!-- <body> -->
-    <body onload=getPlayer()>
+    <body onload=start()>
         <div id="header" style="text-align: center;">
             <h1 style="font-size: 60px; margin-bottom: 0px;">CHECKERS</h1>
             <h2 id="Turn"></h2>
@@ -29,7 +31,7 @@
                 </script>
             </div>
         </div> -->
-        <div class="container">
+        <div id="gameboard" class="container">
             <div class="row">
                 <div class="col-sm-10">
                     <div class="row">

@@ -1,9 +1,9 @@
 var Turn = "Red";
 var check = false;
+var socket = io();
 
 function getPlayer() {
     //Node.js Here to set Player Number
-
     if (Turn == "Red") {
         var String = "It is currently <mark class='red'><u><b>" + Turn + "'s</b></u></mark> turn.";
     } else if (Turn == "Black") {
@@ -12,8 +12,14 @@ function getPlayer() {
     document.getElementById("Turn").innerHTML = String;
 }
 
+function start(){
+    getPlayer()
+    sendMove()
+}
+
 function checkMoves(LastMove = false) {
     getPlayer();
+    console.log("Rn");
     if (check == false) {
         check = true;
         if (Turn == "Red") {
@@ -61,6 +67,7 @@ function checkMoves(LastMove = false) {
             window.location='Rematch.html';
         }
     }
+    sendMove();
 }
 
 function displayMoves(element, repeatAttack = false) {
@@ -385,6 +392,22 @@ function take(element) {
         }
         checkMoves(true)
     }
+}
+
+function sendMove(){
+    var boardState = document.getElementById("gameboard").innerHTML;
+    socket.emit('board', boardState);
+    socket.on('board', function(board){
+        console.log("received");
+        document.getElementById("gameboard").innerHTML = board;
+    });
+    socket.emit('globals', [Turn, check])
+    socket.on('globals', function(globals){
+        console.log(globals);
+        Turn = globals[0];
+        check = globals[1];
+        getPlayer();
+    });
 }
 
 function displayTimer() {
