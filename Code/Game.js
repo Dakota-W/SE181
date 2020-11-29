@@ -1,5 +1,6 @@
 var Turn = "Red";
 var check = false;
+var elementMoved = null;
 var socket = io();
 
 function getPlayer() {
@@ -118,7 +119,7 @@ function displayMoves(element, repeatAttack = false) {
                                     let newPos = new_oppRow.toString() + "," + new_oppCol.toString();
                                     let newSquare = document.getElementById(newPos);
 
-                                    if (!(newSquare.childNodes.length > 0)) {
+                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle"){
                                         possibleAttacks.push(newSquare);
                                         oppPosition.push(oppPos);
                                     }
@@ -216,7 +217,7 @@ function displayMoves(element, repeatAttack = false) {
                                     let newPos = new_oppRow.toString() + "," + new_oppCol.toString();
                                     let newSquare = document.getElementById(newPos);
 
-                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle") {
+                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle"){
                                         possibleAttacks.push(newSquare);
                                         oppPosition.push(oppPos);
                                     }
@@ -361,6 +362,7 @@ function move(element) {
 }
 
 function take(element) {
+    elementMoved = element;
     var curPos = element.parentNode.id; //This is the coordinates from parent div
     var oppPos = element.getAttribute("opp_piece_pos") //Coordinates of Piece being taken
     var oriPos = element.id //Coordinates of Original Piece
@@ -382,7 +384,7 @@ function take(element) {
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
     check = false
-    checkMoves(false,document.getElementById(oriPos).firstChild)
+    displayMoves(elementMoved,true)
     if (document.getElementsByClassName("blue_circle").length > 0){
         displayMoves(document.getElementById(curPos).firstChild, true)
     }
