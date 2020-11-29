@@ -70,7 +70,7 @@ io.on('connection', (socket) => {
         });
     });
     socket.on('board', (board, roomCode) => {
-        console.log("received");
+        console.log(roomCode);
         db.run(update, [roomCode, board[0], board[1], board[2]], function(err){
             if (err){
                 return console.log(err.message);
@@ -79,10 +79,10 @@ io.on('connection', (socket) => {
         });
         io.in(roomCode).emit('board', board);
     });
-    socket.on('globals', (globals, roomCode) => {
-        console.log(globals);
-        io.in(roomCode).emit('globals', globals);
-    });
+    // socket.on('globals', (globals, roomCode) => {
+    //     console.log(globals);
+    //     io.in(roomCode).emit('globals', globals);
+    // });
 
     // socket.on('create', function(){
     //     var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

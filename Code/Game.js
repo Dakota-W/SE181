@@ -385,13 +385,8 @@ function sendMove(){
     socket.on('board', function(board){
         console.log("received");
         document.getElementById("gameboard").innerHTML = board[0];
-    });
-    
-    socket.emit('globals', [Turn, check], RoomCode)
-    socket.on('globals', function(globals){
-        console.log(globals);
-        Turn = globals[0];
-        check = globals[1];
+        Turn = globals[1];
+        check = globals[2];
         getPlayer();
     });
 }
