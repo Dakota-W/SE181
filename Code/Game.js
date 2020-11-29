@@ -80,7 +80,7 @@ function checkMoves(LastMove = false) {
         check = true;
         if (Turn == "Red") {
             document.querySelectorAll(".red_piece").forEach(function (x) {
-                displayMoves(x);
+                displayMoves(x,false,true);
             })
             document.querySelectorAll('.white_circle').forEach(function (x) {
                 x.remove();
@@ -88,7 +88,7 @@ function checkMoves(LastMove = false) {
         }
         if (Turn == "Black") {
             document.querySelectorAll(".black_piece").forEach(function (x) {
-                displayMoves(x);
+                displayMoves(x,false,true);
             })
             document.querySelectorAll('.white_circle').forEach(function (x) {
                 x.remove();
@@ -124,7 +124,7 @@ function checkMoves(LastMove = false) {
     sendMove();
 }
 
-function displayMoves(element, repeatAttack = false) {
+function displayMoves(element, repeatAttack = false, check = false) {
     //Removes all white circles
     document.querySelectorAll('.white_circle').forEach(function (x) {
         x.remove();
@@ -134,7 +134,7 @@ function displayMoves(element, repeatAttack = false) {
     var type = element.innerHTML; //King or Not
     var curRow = parseInt(String(Position).charAt(0));
     var curCol = parseInt(String(Position).charAt(2));
-    if ((String(element.className).includes(Turn.toLowerCase())) && User == Turn) {
+    if ((String(element.className).includes(Turn.toLowerCase())) && (User == Turn || check == true)) {
         if (type == "K") {
             let Moves = [];
             let possibleMoves = [];
@@ -373,11 +373,9 @@ function move(element) {
     if (Turn == "Red") {
         Turn = "Black";
         check = false;
-        ResetTimer();
     } else if (Turn == 'Black') {
         Turn = "Red"
         check = false;
-        ResetTimer();
     }
     checkMoves(true)
 }
@@ -404,20 +402,18 @@ function take(element) {
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
 
-    displayMoves(document.getElementById(curPos).firstChild, true);
+    displayMoves(document.getElementById(curPos).firstChild, true,true);
     if (document.querySelector(".blue_circle") != null) {
-        displayMoves(document.getElementById(curPos).firstChild, true)
+        displayMoves(document.getElementById(curPos).firstChild, true,true)
     } else {
         if (Turn == "Red") {
             Turn = "Black";
             check = false;
             elementSet = false;
-            ResetTimer()
         } else if (Turn == 'Black') {
             Turn = "Red";
             check = false;
             elementSet = false;
-            ResetTimer()
         }
         checkMoves(true)
     }
@@ -436,6 +432,7 @@ function sendMove() {
         Turn = globals[0];
         check = globals[1];
         getPlayer();
+        ResetTimer();
     });
 }
 
