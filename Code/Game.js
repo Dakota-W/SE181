@@ -61,7 +61,7 @@ function setUser(reqCode){
         if (User == "Red") {
             var String = "You are the <mark class='red'><u><b>" + User + "</b></u></mark> Player.";
         } else if (User == "Black") {
-            var String = "You are the <u><b>" + User + "'s</b></u> Player.";
+            var String = "You are the <u><b>" + User + "</b></u> Player.";
         }
     
         document.getElementById("Player").innerHTML = String

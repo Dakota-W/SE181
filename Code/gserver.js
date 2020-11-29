@@ -40,6 +40,7 @@ io.on('connection', (socket) => {
     // })
 
     socket.on('join', function(roomCode,reqCode){
+        var Room = io.sockets.adapter.rooms.get(roomCode)
         if (((Room == null) || ((Room).size != 2))){
             socket.join(roomCode)
             console.log("Joined")
@@ -56,24 +57,21 @@ io.on('connection', (socket) => {
     socket.on("setPlayer",function(roomCode){
         var Room = io.sockets.adapter.rooms.get(roomCode)
         if (Room.player1 == null){
-            console.log("Player 1 set")
             Room.player1 = socket.id
         }
-        else if (socketList[Room.player1] == null){
-            console.log("Player 1 reset")
+        else if (Room.has(Room.player1) == false){
             Room.player1 = socket.id
         }
         else if(Room.player2 == null){
-            console.log("Player 2 set")
             Room.player2 = socket.id
         }
-        else if (socketList[Room.player2] == null){
-            console.log("Player 2 reset")
+        else if (Room.has(Room.player2) == false){
             Room.player2 = socket.id
         }
     })
 
     socket.on("getPlayer",function(roomCode, reqCode){
+        var Room = io.sockets.adapter.rooms.get(roomCode)
         if (Room.player1 == socket.id){
             console.log("Red")
             io.emit(reqCode, "Red")
