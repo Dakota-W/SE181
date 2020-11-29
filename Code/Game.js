@@ -1,9 +1,9 @@
 var Turn = "Red";
 var check = false;
-var elementMoved = null;
-var elementSet = false;
 var socket = io();
 var RoomCode = null;
+var Timer = null;
+var User = "Red";
 
 function getPlayer() {
     //Node.js Here to set Player Number
@@ -15,17 +15,62 @@ function getPlayer() {
     document.getElementById("Turn").innerHTML = String;
 }
 
-function start(){
+function start() {
+    ResetTimer()
+    setSession()
     getPlayer()
     sendMove()
 }
 
-function setSession(){
-    RoomCode = document.getElementById("RoomCode").value;
-    console.log("Session Set to " + RoomCode)
+function setSession() {
+    let URL = window.location.search;
+    let Params = new URLSearchParams(URL);
+    RoomCode = Params.get('roomCode')
+    document.getElementById("roomCode").innerHTML = RoomCode
+
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var generatedResult = '';
+    for ( var i = 0; i < 5; i++ ) {
+      generatedResult += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
     
-    socket.emit('join',RoomCode);
+    socket.emit('join', RoomCode,generatedResult);
+   
+    socket.on(generatedResult, function (message) {
+        if (message == "connect"){
+            nulll
+        }
+        else{
+            alert(message);
+            window.location = "index.html";
+        }
+    });
+    setUser(generatedResult+"1")
     sendMove()
+}
+
+function setUser(reqCode){
+    socket.emit("setPlayer", RoomCode);
+
+    socket.emit("getPlayer", RoomCode, reqCode);
+
+    socket.on(reqCode, function (Color) {
+
+        User = Color
+
+        if (User == "Red") {
+            var String = "You are the <mark class='red'><u><b>" + User + "</b></u></mark> Player.";
+        } else if (User == "Black") {
+            var String = "You are the <u><b>" + User + "'s</b></u> Player.";
+        }
+    
+        document.getElementById("Player").innerHTML = String
+    })
+}
+
+function ResetTimer(){
+    var CurTime = new Date()
+    Timer = new Date(CurTime.getTime() + 300000)
 }
 
 function checkMoves(LastMove = false) {
@@ -50,7 +95,7 @@ function checkMoves(LastMove = false) {
             })
         }
     }
-    
+
 
     //Checking if piece can be king'd
     document.querySelectorAll(".red_piece").forEach(function (x) {
@@ -69,14 +114,11 @@ function checkMoves(LastMove = false) {
     })
 
     //Win condition
-    if (LastMove == true){
-        console.log(document.querySelector(".black_piece"))
+    if (LastMove == true) {
         if (document.querySelector(".black_piece") == null) {
-            alert("Red WINS");
-            window.location='Rematch.html';
+            window.location = 'Rematch.html?roomCode=' + RoomCode + "&Winner=Red";
         } else if (document.querySelector(".red_piece") == null) {
-            alert("Black WINS");
-            window.location='Rematch.html';
+            window.location = 'Rematch.html?roomCode=' + RoomCode + "&Winner=Black";
         }
     }
     sendMove();
@@ -92,7 +134,7 @@ function displayMoves(element, repeatAttack = false) {
     var type = element.innerHTML; //King or Not
     var curRow = parseInt(String(Position).charAt(0));
     var curCol = parseInt(String(Position).charAt(2));
-    if (String(element.className).includes(Turn.toLowerCase())) {
+    if ((String(element.className).includes(Turn.toLowerCase())) && User == Turn) {
         if (type == "K") {
             let Moves = [];
             let possibleMoves = [];
@@ -126,7 +168,7 @@ function displayMoves(element, repeatAttack = false) {
                                     let newPos = new_oppRow.toString() + "," + new_oppCol.toString();
                                     let newSquare = document.getElementById(newPos);
 
-                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle"){
+                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle") {
                                         possibleAttacks.push(newSquare);
                                         oppPosition.push(oppPos);
                                     }
@@ -214,7 +256,7 @@ function displayMoves(element, repeatAttack = false) {
                                     let newPos = new_oppRow.toString() + "," + new_oppCol.toString();
                                     let newSquare = document.getElementById(newPos);
 
-                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle"){
+                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle") {
                                         possibleAttacks.push(newSquare);
                                         oppPosition.push(oppPos);
                                     }
@@ -331,9 +373,11 @@ function move(element) {
     if (Turn == "Red") {
         Turn = "Black";
         check = false;
+        ResetTimer();
     } else if (Turn == 'Black') {
         Turn = "Red"
         check = false;
+        ResetTimer();
     }
     checkMoves(true)
 }
@@ -360,37 +404,67 @@ function take(element) {
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
 
-    displayMoves(document.getElementById(curPos).firstChild,true);
-    if (document.querySelector(".blue_circle") != null){
+    displayMoves(document.getElementById(curPos).firstChild, true);
+    if (document.querySelector(".blue_circle") != null) {
         displayMoves(document.getElementById(curPos).firstChild, true)
-    }
-    else{
+    } else {
         if (Turn == "Red") {
             Turn = "Black";
             check = false;
-            elementSet = false
+            elementSet = false;
+            ResetTimer()
         } else if (Turn == 'Black') {
             Turn = "Red";
             check = false;
-            elementSet = false
+            elementSet = false;
+            ResetTimer()
         }
         checkMoves(true)
     }
 }
 
-function sendMove(){
+function sendMove() {
     var boardState = document.getElementById("gameboard").innerHTML;
     socket.emit('board', boardState, RoomCode);
-    socket.on('board', function(board){
+    socket.on('board', function (board) {
         console.log("received");
         document.getElementById("gameboard").innerHTML = board;
     });
-    
+
     socket.emit('globals', [Turn, check], RoomCode)
-    socket.on('globals', function(globals){
-        console.log(globals);
+    socket.on('globals', function (globals) {
         Turn = globals[0];
         check = globals[1];
         getPlayer();
     });
+}
+
+function displayTimer() {
+    // Set start time
+    //var startTime = new Date();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get current time
+        var currentTime = new Date().getTime();
+
+        // Find the time difference
+        var timeDifference = Timer - currentTime;
+        if (timeDifference <= 0){
+            if (Turn == "Black") {
+                window.location = 'Rematch.html?roomCode=' + RoomCode + "&Winner=Red";
+            } else if (Turn == "Red") {
+                window.location = 'Rematch.html?roomCode=' + RoomCode + "&Winner=Red";
+            }
+        }
+
+        // Time calculations for hours, minutes and seconds
+        var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        // Output timer
+        document.getElementById("Timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+    }, 1000);
 }

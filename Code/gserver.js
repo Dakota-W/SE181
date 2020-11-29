@@ -39,11 +39,49 @@ io.on('connection', (socket) => {
     //     console.log(socket.rooms);
     // })
 
-    socket.on('join', function(roomCode){
-        socket.join(roomCode)
-        console.log("Joined")
-        console.log(socket.rooms)
-        console.log(io.sockets.adapter.rooms);
+    socket.on('join', function(roomCode,reqCode){
+        if (((Room == null) || ((Room).size != 2))){
+            socket.join(roomCode)
+            console.log("Joined")
+            console.log(socket.rooms)
+            console.log(io.sockets.adapter.rooms);
+            io.emit(roomCode,"connect");
+        }
+        else{
+            console.log("Full")
+            io.emit(reqCode,"Room Full");
+        }
+    })
+
+    socket.on("setPlayer",function(roomCode){
+        var Room = io.sockets.adapter.rooms.get(roomCode)
+        if (Room.player1 == null){
+            console.log("Player 1 set")
+            Room.player1 = socket.id
+        }
+        else if (socketList[Room.player1] == null){
+            console.log("Player 1 reset")
+            Room.player1 = socket.id
+        }
+        else if(Room.player2 == null){
+            console.log("Player 2 set")
+            Room.player2 = socket.id
+        }
+        else if (socketList[Room.player2] == null){
+            console.log("Player 2 reset")
+            Room.player2 = socket.id
+        }
+    })
+
+    socket.on("getPlayer",function(roomCode, reqCode){
+        if (Room.player1 == socket.id){
+            console.log("Red")
+            io.emit(reqCode, "Red")
+        }
+        else if (Room.player2 == socket.id){
+            console.log("Black")
+            io.emit(reqCode, "Black")
+        }
     })
 });
 

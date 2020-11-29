@@ -6,8 +6,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 function MainMenu(button){
     if(button == "C"){
-        createGame();
-        window.location="Game.html";   
+        createGame();   
     }
     else if(button == "J") {
         window.location="Join.html";       
@@ -18,10 +17,24 @@ function MainMenu(button){
 }
 
 function Join(){
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var generatedResult = '';
+    for ( var i = 0; i < 5; i++ ) {
+      generatedResult += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+
     var RoomCode = document.getElementById("RoomCode").value;
-    socket.emit('join',RoomCode);
-    window.location = "Game.html"
-    //Add Node.JS here
+    socket.emit('join',RoomCode, generatedResult);
+    
+
+    socket.on(generatedResult, function (message) {
+        if (message == "connect"){
+            window.location = "Game.html?roomCode="+RoomCode;
+        }
+        else{
+            alert(message);
+        }
+    });
 }
 
 function createGame() {
@@ -32,4 +45,5 @@ function createGame() {
         }
     console.log(generatedResult)
     socket.emit('join',generatedResult);
+    window.location="Game.html?roomCode="+generatedResult;
 }
