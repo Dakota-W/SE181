@@ -383,7 +383,7 @@ function take(element) {
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
     check = false
-    elementMoved = element;
+    elementMoved = document.getElementById(oriPos).firstChild;
     checkMoves(false,elementMoved);
     if (document.querySelector(".blue_circle") != null){
         displayMoves(document.getElementById(curPos).firstChild, true)
