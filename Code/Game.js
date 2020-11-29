@@ -140,7 +140,7 @@ function displayMoves(element, repeatAttack = false) {
                                     let newPos = new_oppRow.toString() + "," + new_oppCol.toString();
                                     let newSquare = document.getElementById(newPos);
 
-                                    if (!(newSquare.childNodes.length > 0)) {
+                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle") {
                                         possibleAttacks.push(newSquare);
                                         oppPosition.push(oppPos);
                                     }
@@ -216,7 +216,7 @@ function displayMoves(element, repeatAttack = false) {
                                     let newPos = new_oppRow.toString() + "," + new_oppCol.toString();
                                     let newSquare = document.getElementById(newPos);
 
-                                    if (!(newSquare.childNodes.length > 0)) {
+                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle") {
                                         possibleAttacks.push(newSquare);
                                         oppPosition.push(oppPos);
                                     }
@@ -289,7 +289,7 @@ function displayMoves(element, repeatAttack = false) {
                                     let newPos = new_oppRow.toString() + "," + new_oppCol.toString();
                                     let newSquare = document.getElementById(newPos);
 
-                                    if (!(newSquare.childNodes.length > 0)) {
+                                    if (!(newSquare.childNodes.length > 0) || newSquare.firstChild.className == "blue_circle") {
                                         possibleAttacks.push(newSquare);
                                         oppPosition.push(oppPos);
                                     }
