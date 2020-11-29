@@ -2,6 +2,7 @@ var Turn = "Red";
 var check = false;
 var elementMoved = null;
 var socket = io();
+var RoomCode = null;
 
 function getPlayer() {
     //Node.js Here to set Player Number
@@ -15,6 +16,14 @@ function getPlayer() {
 
 function start(){
     getPlayer()
+    sendMove()
+}
+
+function setSession(){
+    RoomCode = document.getElementById("RoomCode").value;
+    console.log("Session Set to " + RoomCode)
+    
+    socket.emit('join',RoomCode);
     sendMove()
 }
 
@@ -402,12 +411,13 @@ function take(element) {
 
 function sendMove(){
     var boardState = document.getElementById("gameboard").innerHTML;
-    socket.emit('board', boardState);
+    socket.emit('board', boardState, RoomCode);
     socket.on('board', function(board){
         console.log("received");
         document.getElementById("gameboard").innerHTML = board;
     });
-    socket.emit('globals', [Turn, check])
+    
+    socket.emit('globals', [Turn, check], RoomCode)
     socket.on('globals', function(globals){
         console.log(globals);
         Turn = globals[0];
