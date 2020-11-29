@@ -1,6 +1,7 @@
 var Turn = "Red";
 var check = false;
 var elementMoved = null;
+var elementSet = false;
 var socket = io();
 var RoomCode = null;
 
@@ -27,32 +28,29 @@ function setSession(){
     sendMove()
 }
 
-function checkMoves(LastMove = false, element = null) {
+function checkMoves(LastMove = false) {
     getPlayer();
-    console.log("Rn");
-    if (element != null){
-        displayMoves(element,true);
-    } else{
-        if (check == false) {
-            check = true;
-            if (Turn == "Red") {
-                document.querySelectorAll(".red_piece").forEach(function (x) {
-                    displayMoves(x);
-                })
-                document.querySelectorAll('.white_circle').forEach(function (x) {
-                    x.remove();
-                })
-            }
-            if (Turn == "Black") {
-                document.querySelectorAll(".black_piece").forEach(function (x) {
-                    displayMoves(x);
-                })
-                document.querySelectorAll('.white_circle').forEach(function (x) {
-                    x.remove();
-                })
-            }
+
+    if (check == false) {
+        check = true;
+        if (Turn == "Red") {
+            document.querySelectorAll(".red_piece").forEach(function (x) {
+                displayMoves(x);
+            })
+            document.querySelectorAll('.white_circle').forEach(function (x) {
+                x.remove();
+            })
+        }
+        if (Turn == "Black") {
+            document.querySelectorAll(".black_piece").forEach(function (x) {
+                displayMoves(x);
+            })
+            document.querySelectorAll('.white_circle').forEach(function (x) {
+                x.remove();
+            })
         }
     }
+    
 
     //Checking if piece can be king'd
     document.querySelectorAll(".red_piece").forEach(function (x) {
@@ -160,17 +158,7 @@ function displayMoves(element, repeatAttack = false) {
                     }
                 }
             })
-            if (possibleAttacks.length > 0 && repeatAttack == true) {
-                possibleAttacks.forEach(function (item, index) {
-                    var div = document.createElement("div");
-                    div.className = "blue_circle"
-                    div.id = Position;
-                    div.setAttribute("opp_piece_pos", oppPosition[index]);
-                    div.setAttribute("onclick", "take(this)");
-                    item.append(div);
-                    div.click()
-                })
-            } else if (possibleAttacks.length > 0) {
+            if (possibleAttacks.length > 0) {
                 possibleAttacks.forEach(function (item, index) {
                     var div = document.createElement("div");
                     div.className = "blue_circle"
@@ -235,17 +223,7 @@ function displayMoves(element, repeatAttack = false) {
                         }
                     }
                 })
-                if (possibleAttacks.length > 0 && repeatAttack == true) {
-                    possibleAttacks.forEach(function (item, index) {
-                        var div = document.createElement("div");
-                        div.className = "blue_circle"
-                        div.id = Position;
-                        div.setAttribute("opp_piece_pos", oppPosition[index]);
-                        div.setAttribute("onclick", "take(this)");
-                        item.append(div);
-                        div.click()
-                    })
-                } else if (possibleAttacks.length > 0) {
+                if (possibleAttacks.length > 0) {
                     possibleAttacks.forEach(function (item, index) {
                         var div = document.createElement("div");
                         div.className = "blue_circle"
@@ -308,17 +286,7 @@ function displayMoves(element, repeatAttack = false) {
                         }
                     }
                 })
-                if (possibleAttacks.length > 0 && repeatAttack == true) {
-                    possibleAttacks.forEach(function (item, index) {
-                        var div = document.createElement("div");
-                        div.className = "blue_circle"
-                        div.id = Position;
-                        div.setAttribute("opp_piece_pos", oppPosition[index]);
-                        div.setAttribute("onclick", "take(this)");
-                        item.append(div);
-                        div.click()
-                    })
-                } else if (possibleAttacks.length > 0) {
+                if (possibleAttacks.length > 0) {
                     possibleAttacks.forEach(function (item, index) {
                         var div = document.createElement("div");
                         div.className = "blue_circle"
@@ -391,9 +359,8 @@ function take(element) {
     document.getElementById(oppPos).firstChild.remove()
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
-    check = false
-    elementMoved = document.getElementById(oriPos).firstChild;
-    checkMoves(false,elementMoved);
+
+    displayMoves(document.getElementById(curPos).firstChild,true);
     if (document.querySelector(".blue_circle") != null){
         displayMoves(document.getElementById(curPos).firstChild, true)
     }
@@ -401,9 +368,11 @@ function take(element) {
         if (Turn == "Red") {
             Turn = "Black";
             check = false;
+            elementSet = false
         } else if (Turn == 'Black') {
             Turn = "Red";
             check = false;
+            elementSet = false
         }
         checkMoves(true)
     }
@@ -446,28 +415,5 @@ function displayTimer() {
 
         // Output timer
         document.getElementById("Timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
-    }, 1000);
-}
-
-function displayTimer() {
-    // Set start time
-    var startTime = new Date().getTime();
-    
-    // Update the count down every 1 second
-    var x = setInterval(function() {
-    
-      // Get current time
-      var currentTime = new Date().getTime();
-        
-      // Find the time difference
-      var timeDifference = currentTime - startTime;
-        
-      // Time calculations for hours, minutes and seconds
-      var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-        
-      // Output timer
-      document.getElementById("Timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
     }, 1000);
 }
