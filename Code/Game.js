@@ -362,7 +362,6 @@ function move(element) {
 }
 
 function take(element) {
-    elementMoved = element;
     var curPos = element.parentNode.id; //This is the coordinates from parent div
     var oppPos = element.getAttribute("opp_piece_pos") //Coordinates of Piece being taken
     var oriPos = element.id //Coordinates of Original Piece
@@ -384,6 +383,7 @@ function take(element) {
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
     check = false
+    elementMoved = element;
     displayMoves(elementMoved,true)
     if (document.getElementsByClassName("blue_circle").length > 0){
         displayMoves(document.getElementById(curPos).firstChild, true)
