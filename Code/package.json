@@ -12,7 +12,10 @@
     "socket.io": "^3.0.3",
     "sqlite3": "^5.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-google": "^0.14.0"
+  },
   "scripts": {
     "test": "node sampleApp.js"
   },
