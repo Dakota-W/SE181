@@ -1,0 +1,58 @@
+<html>
+    <body>
+
+    <h1>The XMLHttpRequest Object</h1>
+
+    <button type="button" onclick="loadDoc()">Request data</button>
+
+    <p id="demo"></p>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <script>
+
+        var username = "checkerTest";
+        var password = "123123";
+
+        // function authenticateUser(user, password)
+        // {
+        //     var token = user + ":" + password;
+
+        //     // Should i be encoding this value????? does it matter???
+        //     // Base64 Encoding -> btoa
+        //     var hash = btoa(token); 
+
+        //     return "Basic " + hash;
+        // }
+
+        function loadDoc() {
+            $.ajax
+            ({
+            type: "GET",
+            url: "http://zngjacky.duckdns.org:3000/",
+            dataType: 'json',
+            success: function(output, status, xhr) {
+                alert('hi');
+            }
+            });
+            
+            // var xhr = new XMLHttpRequest();
+            // xhr.withCredentials = true;
+
+            // xhr.addEventListener("readystatechange", function() {
+            // if(this.readyState === 4) {
+            //     console.log(this.responseText);
+            // }
+            // });
+
+            // xhr.open("GET", "https://a14364f7trial-workspaces-ws-mtddd-app1.us10.trial.applicationstudio.cloud.sap/");
+            // xhr.setRequestHeader("cookie", "workspaces-ws-mtddd_WSR_SESSIONID=OxqQe27vltbb3SZpj07ySqYhjMWer+IHHqWCuZmDzlPo7Sm3rPC8nNOyzvOj2V8KLZ3yvebyxor5Hs59/qI4SQ==");
+            // xhr.setRequestHeader("Authorization", "Basic Y2hlY2tlclRlc3Q6MTIzMTIz");
+
+            // xhr.send();
+        }
+    </script>
+
+    </body>
+</html>

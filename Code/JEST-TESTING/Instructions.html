@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Checkers - Instructions</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <div id="header" style="text-align: center;">
+        <h1 style="font-size: 60px; margin-bottom: 0px;">CHECKERS</h1> 
+        <h2 style="margin-top: 0px;">Instructions</h1>
+    </div>
+        <section class="container">
+            <div>
+                <h2 class="row" style="font-size: 20px;">FOR 2 PLAYERS</h3>
+            </div>
+        </section>
+        <section class="container">
+            <div>
+                <h3 class="row">CONTENTS</h3>
+                <p>
+                    24 interlocking checkers; 12 red and 12 black<br>
+                    Each player places his twelve checkers on the black square of the first three rows on opposite ends of the board.
+                </p>
+            </div>
+        </section>
+        <section class="container">
+            <div>
+                <h3 class="row">THE OBJECTIVE OF THE GAME</h3>
+                <p>
+                    To capture all of the opponent's men, or block them so they cannot be moved. The checkers are moved diagonally and each player moves alternately one of his men, in order to 'capture' and opponen'ts checker, he must be able to jump (with his own man) over his opponent's checker when there is a vacant square behind. Single men may move diagonally forward. When a checker has reached the last row of his opponent's side, it becomes 'King' and then may move diagonally forward or backward. The 'King' is 'crowned' by placing another checker on top of it.
+                </p>
+                <p>
+                    You are allowed to jump as many of the opponent's men on the same move if there are vacant squares diagonally behind. Where there is a 'jump' available, the opponent must jump.
+                </p>
+            </div>
+        </section>
+        <section class="container">
+            <div><h3 class="row">GAME INTERACTIONS</h3></div>
+            <div>
+                <h4>Main Menu</h4>
+                <ul>
+                    <li>
+                        Player 1 will initialize a game session by pressing on the "Create" button. Player 1 will then land on the board page with a unique code that is the game session ID to give to Player 2
+                    </li>
+                    <li>
+                        Player 2 will join Player 1's game session by pressing on the "Join" button. A dialog box will appear asking for the game session ID to be provided by Player 1
+                    </li>
+                    <li>
+                        Players may resume a paused game session by pressing on the "Join" button. A dialog box will appear asking for the ID of the paused game session.
+                    </li>
+                    <ul>
+                        <li>Players will follow a similar procedure to resume the game after rejoining a paused game</li>
+                    </ul>
+                </ul>
+            </div>
+            <div>
+                <h4>Game Menu</h4>
+                <ul>
+                    <li>
+                        Player's turn is indicated on the top of the screen
+                    </li>
+                    <li>
+                        Players may pause the game in conjuction with the other player
+                    </li>
+                    <ul>
+                        <p style="margin-bottom: 0px;">To pause the game, players must:</p>
+                        <li>
+                            Press the pause button found on the game screen
+                        </li>
+                        <li>
+                            A popup will appear on the other player's screen asking for confirmation to pause the game
+                        </li>
+                    </ul>
+                    <li>
+                        Players may resume a paused game in conjuction with the other player
+                    </li>
+                    <ul>
+                        <p style="margin-bottom: 0px;">To resume a paused game, players must:</p>
+                        <li>
+                            Press the resume game found on the game screen
+                        </li>
+                        <li>
+                            A popup will appear on the other player's screen asking for confirmation to resume the game
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+            <div>
+                <h4>Gameplay</h4>
+                <ul>
+                    <li>
+                        To move a piece, players will select the piece they want to move.<br>
+                        Possible moves will be highlighted. Players will select a highlighted space to move to that space.
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- <div style="margin-top: 2%;text-align:center;font-size: 60;">Checkers</div> -->
+        <div class="container text-center">
+            <button type="button" class="btn btn-dark btn-lg" onclick="window.location='index.html'">Back</button>
+        </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>
