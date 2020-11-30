@@ -1,14 +1,18 @@
 p, li{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:"Roboto", "Helvetica Neue", Helvetica, Arial;
 }
 h3, h2.row{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family:"Roboto", "Helvetica Neue", Helvetica, Arial;
 }
 #header {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial;
 }
 button{
     width: 80%;
     height: 70px;
     margin: 20px;
+}
+div.divFooter {
+    position: fixed;
+    bottom: 0;
 }

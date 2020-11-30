@@ -10,7 +10,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="Game.js"></script>
-        <title>Checkers - </title><!-- Add variable of the game session to title-->
+        <title>Checkers</title><!-- Add variable of the game session to title-->
 
 
     </head>
@@ -18,7 +18,8 @@
     <body onload=start()>
         <div id="header" style="text-align: center;">
             <h1 style="font-size: 60px; margin-bottom: 0px;">CHECKERS</h1>
-            <h2 id="Turn"></h2>
+            <h2 id="Player"></h2>
+            <h3 id="Turn"></h3>
         </div>
         <!-- <div style="float:right;">
             <div>
@@ -124,8 +125,7 @@
                 </div>
                 <div class="col-sm-2" style="height: 100%; border-color:black; border-style: solid;">
                     <div class="side-menu" >
-                        <input type="text" class="row" id="RoomCode" style="margin-bottom: 10%;"></input>
-                        <input type="button" style="margin-bottom: 10%;" onclick="setSession()">Set Session</input>
+                        <div type="text" class="row" id="roomCode" style="margin-bottom: 10%;"></div>
                         <div class="row" style="margin-bottom: 20%; margin-left: 3%;">
                             <p id="Timer" style="position: absolute; font-size: 40;">0h 0m 0s</p>
                             <script>
@@ -136,14 +136,12 @@
                 </div>
             </div>
         </div>
-        
-
-
-        <div>
-            <span class="button" onclick="window.location='index.html'">Back</span>
+        <div class="divFooter">
+            <div>
+                <span class="button" onclick="window.location='index.html'">Back</span>
+            </div>
+            <div><b>Version 6</b></div>
         </div>
-
-
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>    

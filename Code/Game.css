@@ -77,6 +77,7 @@
     font-weight: bold;
     line-height: 50px;
     user-select: none;
+    opacity: 1;
 }
 
 .red_piece_attk{
@@ -161,6 +162,7 @@ mark.red {
     cursor: pointer;
     padding: 0 8px;
     white-space: pre-wrap;
+    margin-left: 1%;
 }
 
 .button::before {
@@ -175,14 +177,14 @@ mark.red {
     left: 0;
     right: 0;
     top: 0;
-    background: red;
+    background: blue;
     border-radius: 4px;
     transform: scale(0);
     transition-property: transform,opacity;
 }
 
 .button:hover::before {
-    opacity: .10;
+    opacity: .5;
     transform: scale(1);
 }
 
@@ -203,6 +205,7 @@ mark.red {
     transition-property: transform,opacity;
 }
 
-#header h1{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+div.divFooter {
+    position: fixed;
+    bottom: 0;
 }

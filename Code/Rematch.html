@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="MainMenu.js"></script>
+        <link rel="stylesheet" href="Game.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+        <div style="margin-top: 2%;text-align:center;font-size: 60;">Checkers</div>
+    </head>
+    <body onload=declareWinner()>
+        <div style="text-align: center;">
+            <div>
+                <h1 id="Winner"></h1>
+            </div>
+            <div>
+                <span class="button" style="margin-top: 2mm;" onclick="Rematch()">Rematch</span>
+            </div>
+        </div>
+        <div>
+            <span class="button" onclick="window.location='index.html'">Back</span>
+        </div>
+        <div class="divFooter">
+            <div><b>Version 6</b></div>
+        </div>
+    </body>
+</html>
