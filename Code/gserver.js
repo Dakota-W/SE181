@@ -105,7 +105,7 @@ io.on('connection', (socket) => {
             console.log("Joined")
             console.log(socket.rooms)
             console.log(io.sockets.adapter.rooms);
-            io.emit(roomCode,"connect");
+            io.emit(reqCode,"connect");
         }
         else{
             console.log("Full")

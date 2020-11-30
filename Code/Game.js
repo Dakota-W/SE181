@@ -12,6 +12,20 @@ function getPlayer() {
     } else if (Turn == "Black") {
         var String = "It is currently <u><b>" + Turn + "'s</b></u> turn.";
     }
+    if (Turn != User) {
+        //Removes all blue circles
+        document.querySelectorAll('.blue_circle').forEach(function (x) {
+            x.remove()
+        })
+
+        document.querySelectorAll('.black_piece_attk').forEach(function (x) {
+            x.className = "black_piece"
+        })
+
+        document.querySelectorAll('.red_piece_attk').forEach(function (x) {
+            x.className = "red_piece"
+        })
+    }
     document.getElementById("Turn").innerHTML = String;
 }
 
@@ -30,26 +44,25 @@ function setSession() {
 
     var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var generatedResult = '';
-    for ( var i = 0; i < 5; i++ ) {
-      generatedResult += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    for (var i = 0; i < 5; i++) {
+        generatedResult += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
     }
-    
-    socket.emit('join', RoomCode,generatedResult);
-   
+
+    socket.emit('join', RoomCode, generatedResult);
+
     socket.on(generatedResult, function (message) {
-        if (message == "connect"){
-            nulll
-        }
-        else{
+        if (message == "connect") {
+            null
+        } else {
             alert(message);
             window.location = "index.html";
         }
     });
-    setUser(generatedResult+"1")
+    setUser(generatedResult + "1")
     sendMove()
 }
 
-function setUser(reqCode){
+function setUser(reqCode) {
     socket.emit("setPlayer", RoomCode);
 
     socket.emit("getPlayer", RoomCode, reqCode);
@@ -63,12 +76,12 @@ function setUser(reqCode){
         } else if (User == "Black") {
             var String = "You are the <u><b>" + User + "</b></u> Player.";
         }
-    
+
         document.getElementById("Player").innerHTML = String
     })
 }
 
-function ResetTimer(){
+function ResetTimer() {
     var CurTime = new Date()
     Timer = new Date(CurTime.getTime() + 300000)
 }
@@ -80,7 +93,7 @@ function checkMoves(LastMove = false) {
         check = true;
         if (Turn == "Red") {
             document.querySelectorAll(".red_piece").forEach(function (x) {
-                displayMoves(x);
+                displayMoves(x, false, true);
             })
             document.querySelectorAll('.white_circle').forEach(function (x) {
                 x.remove();
@@ -88,7 +101,7 @@ function checkMoves(LastMove = false) {
         }
         if (Turn == "Black") {
             document.querySelectorAll(".black_piece").forEach(function (x) {
-                displayMoves(x);
+                displayMoves(x, false, true);
             })
             document.querySelectorAll('.white_circle').forEach(function (x) {
                 x.remove();
@@ -124,7 +137,7 @@ function checkMoves(LastMove = false) {
     sendMove();
 }
 
-function displayMoves(element, repeatAttack = false) {
+function displayMoves(element, repeatAttack = false, check = false) {
     //Removes all white circles
     document.querySelectorAll('.white_circle').forEach(function (x) {
         x.remove();
@@ -134,7 +147,7 @@ function displayMoves(element, repeatAttack = false) {
     var type = element.innerHTML; //King or Not
     var curRow = parseInt(String(Position).charAt(0));
     var curCol = parseInt(String(Position).charAt(2));
-    if ((String(element.className).includes(Turn.toLowerCase())) && User == Turn) {
+    if ((String(element.className).includes(Turn.toLowerCase())) && (User == Turn || check == true)) {
         if (type == "K") {
             let Moves = [];
             let possibleMoves = [];
@@ -373,16 +386,16 @@ function move(element) {
     if (Turn == "Red") {
         Turn = "Black";
         check = false;
-        ResetTimer();
     } else if (Turn == 'Black') {
         Turn = "Red"
         check = false;
-        ResetTimer();
     }
     checkMoves(true)
 }
 
 function take(element) {
+    console.log(Turn)
+    console.log(User)
     var curPos = element.parentNode.id; //This is the coordinates from parent div
     var oppPos = element.getAttribute("opp_piece_pos") //Coordinates of Piece being taken
     var oriPos = element.id //Coordinates of Original Piece
@@ -404,20 +417,18 @@ function take(element) {
 
     document.getElementById(curPos).appendChild(document.getElementById(oriPos).firstChild)
 
-    displayMoves(document.getElementById(curPos).firstChild, true);
+    displayMoves(document.getElementById(curPos).firstChild, true, true);
     if (document.querySelector(".blue_circle") != null) {
-        displayMoves(document.getElementById(curPos).firstChild, true)
+        displayMoves(document.getElementById(curPos).firstChild, true, true)
     } else {
         if (Turn == "Red") {
             Turn = "Black";
             check = false;
             elementSet = false;
-            ResetTimer()
         } else if (Turn == 'Black') {
             Turn = "Red";
             check = false;
             elementSet = false;
-            ResetTimer()
         }
         checkMoves(true)
     }
@@ -433,6 +444,7 @@ function sendMove() {
         Turn = globals[1];
         check = globals[2];
         getPlayer();
+        ResetTimer();
     });
 }
 
@@ -448,7 +460,7 @@ function displayTimer() {
 
         // Find the time difference
         var timeDifference = Timer - currentTime;
-        if (timeDifference <= 0){
+        if (timeDifference <= 0) {
             if (Turn == "Black") {
                 window.location = 'Rematch.html?roomCode=' + RoomCode + "&Winner=Red";
             } else if (Turn == "Red") {
