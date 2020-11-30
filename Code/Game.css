@@ -204,3 +204,8 @@ mark.red {
     transform: scale(0);
     transition-property: transform,opacity;
 }
+
+div.divFooter {
+    position: fixed;
+    bottom: 0;
+}

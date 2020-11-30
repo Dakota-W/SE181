@@ -12,3 +12,7 @@ button{
     height: 70px;
     margin: 20px;
 }
+div.divFooter {
+    position: fixed;
+    bottom: 0;
+}
