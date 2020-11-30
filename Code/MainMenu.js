@@ -47,3 +47,41 @@ function createGame() {
     socket.emit('join',generatedResult);
     window.location="Game.html?roomCode="+generatedResult;
 }
+
+function declareWinner(){
+    let URL = window.location.search;
+    let Params = new URLSearchParams(URL);
+    let W = Params.get('Winner')
+    console.log(W);
+
+    if (W == "Red") {
+        var String = "<mark class='red'><u><b>" + W + "</b></u></mark> Wins.";
+    } else if (W == "Black") {
+        var String = "<u><b>" + W + "</b></u> Wins";
+    }
+    document.getElementById("Winner").innerHTML = String
+}
+
+function Rematch(){
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var generatedResult = '';
+    for ( var i = 0; i < 5; i++ ) {
+      generatedResult += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+
+    let URL = window.location.search;
+    let Params = new URLSearchParams(URL);
+    let RoomCode = Params.get('roomCode')
+
+    socket.emit('join', RoomCode, generatedResult);
+    
+    socket.on(generatedResult, function (message) {
+        if (message == "connect"){
+            window.location = "Game.html?roomCode="+RoomCode;
+        }
+        else{
+            alert(message);
+            window.location = "index.html";
+        }
+    });
+}
