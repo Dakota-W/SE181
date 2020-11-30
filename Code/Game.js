@@ -476,13 +476,4 @@ function displayTimer() {
         // Output timer
         document.getElementById("Timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
     }, 1000);
-}<<<<<<< HEAD
-=======
-
-    socket.emit('board', [boardState, Turn, check], RoomCode);
-    socket.on('board', function(board){
-        console.log("received");
-        document.getElementById("gameboard").innerHTML = board[0];
-        Turn = globals[1];
-        check = globals[2];
->>>>>>> vq
+}
