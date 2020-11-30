@@ -52,9 +52,9 @@ function declareWinner() {
   console.log(W);
 
   if (W == 'Red') {
-    const String = '<mark class=\'red\'><u><b>' + W + '</b></u></mark> Wins.';
+    var String = '<mark class=\'red\'><u><b>' + W + '</b></u></mark> Wins.';
   } else if (W == 'Black') {
-    const String = '<u><b>' + W + '</b></u> Wins';
+    var String = '<u><b>' + W + '</b></u> Wins';
   }
   document.getElementById('Winner').innerHTML = String;
 }

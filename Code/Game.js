@@ -8,9 +8,9 @@ let User = 'Red';
 function getPlayer() {
   // Node.js Here to set Player Number
   if (Turn == 'Red') {
-    let String = 'It is currently <mark class=\'red\'><u><b>' + Turn + '\'s</b></u></mark> turn.';
+    var String = 'It is currently <mark class=\'red\'><u><b>' + Turn + '\'s</b></u></mark> turn.';
   } else if (Turn == 'Black') {
-    let String = 'It is currently <u><b>' + Turn + '\'s</b></u> turn.';
+    var String = 'It is currently <u><b>' + Turn + '\'s</b></u> turn.';
   }
   if (Turn != User) {
     // Removes all blue circles
@@ -71,9 +71,9 @@ function setUser(reqCode) {
     User = Color;
 
     if (User == 'Red') {
-      let String = 'You are the <mark class=\'red\'><u><b>' + User + '</b></u></mark> Player.';
+      var String = 'You are the <mark class=\'red\'><u><b>' + User + '</b></u></mark> Player.';
     } else if (User == 'Black') {
-      let String = 'You are the <u><b>' + User + '</b></u> Player.';
+      var String = 'You are the <u><b>' + User + '</b></u> Player.';
     }
 
     document.getElementById('Player').innerHTML = String;
@@ -461,7 +461,7 @@ function displayTimer() {
       if (Turn == 'Black') {
         window.location = 'Rematch.html?roomCode=' + RoomCode + '&Winner=Red';
       } else if (Turn == 'Red') {
-        window.location = 'Rematch.html?roomCode=' + RoomCode + '&Winner=Red';
+        window.location = 'Rematch.html?roomCode=' + RoomCode + '&Winner=Black';
       }
     }
 
