@@ -441,8 +441,8 @@ function sendMove() {
     socket.on('board', function(board){
         console.log("received");
         document.getElementById("gameboard").innerHTML = board[0];
-        Turn = globals[1];
-        check = globals[2];
+        Turn = board[1];
+        check = board[2];
         getPlayer();
         ResetTimer();
     });
